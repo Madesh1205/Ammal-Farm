@@ -4,7 +4,7 @@ export const GOATS = [
     name: 'Nellore Judipi',
     aka: 'Bakrid Goats',
     description: 'Premium breed known for its majestic height, distinctive long ears, and strong build. Highly sought after for religious festivals and premium meat quality.',
-    image: 'https://images.unsplash.com/photo-1524024973431-2ad916746881?auto=format&fit=crop&q=80&w=800',
+    image: '/regenerated_image_1777396078153.png',
     tags: ['Premium', 'Sturdy', 'Majestic']
   },
   {
@@ -12,7 +12,7 @@ export const GOATS = [
     name: 'Salem Black',
     aka: 'Local Pride',
     description: 'A hardy, sleek black breed indigenous to the region. Excellent adaptability and meat yield. Perfect for local farming environments.',
-    image: 'https://images.unsplash.com/photo-1533314902120-00dd8bb5ae3c?auto=format&fit=crop&q=80&w=800',
+    image: '/regenerated_image_1777396080657.png',
     tags: ['Hardy', 'Lean Meat', 'Indigenous']
   }
 ];

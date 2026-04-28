@@ -37,7 +37,7 @@ export default function Home() {
         >
           <div className="aspect-[4/3] overflow-hidden">
             <img 
-              src="https://images.unsplash.com/photo-1524024973431-2ad916746881?auto=format&fit=crop&q=80&w=1200" 
+              src="/regenerated_image_1777395895399.png" 
               alt="Ammal Farm Herd" 
               className="w-full h-full object-cover"
               referrerPolicy="no-referrer"
