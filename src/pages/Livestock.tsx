@@ -28,7 +28,7 @@ export default function Livestock() {
               >
                 <span className="text-[10px] uppercase font-bold text-accent tracking-widest mb-4">Featured Breed</span>
                 <div className="aspect-square overflow-hidden mb-6 bg-stone-50">
-                  <img src={goat.image} alt={goat.name} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" referrerPolicy="no-referrer" />
+                  <img src={goat.image} alt={goat.name} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
                 </div>
                 <h3 className="text-2xl font-bold mb-2">{goat.name}</h3>
                 <p className="text-[13px] text-text-muted leading-relaxed mb-8 flex-grow">

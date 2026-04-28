@@ -15,7 +15,7 @@ export default function Poultry() {
                 <div key={item.name} className="flex justify-between items-center py-5 border-b border-border group">
                   <div className="flex gap-4 items-center">
                     <div className="w-12 h-12 overflow-hidden border border-border">
-                      <img src={item.image} alt={item.name} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-grayscale duration-500" referrerPolicy="no-referrer" />
+                      <img src={item.image} alt={item.name} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
                     </div>
                     <div>
                       <h4 className="font-bold text-sm tracking-tight">{item.name}</h4>
