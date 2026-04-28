@@ -31,4 +31,4 @@ export const EGGS = [
 ];
 
 export const whatsappNumber = "+916380898358";
-export const mapsLink = "https://share.google/feecOkWvoipQI7edM";
+export const mapsLink = "https://maps.app.goo.gl/nsvn6YGBHCA3QQvf9";
