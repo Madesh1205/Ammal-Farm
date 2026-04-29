@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { Menu, X } from 'lucide-react';
-import { FaWhatsapp, FaInstagram, FaMapMarkerAlt } from 'react-icons/fa';
+import { FaWhatsapp, FaInstagram, FaMapMarkerAlt, FaPhone } from 'react-icons/fa';
 import { mapsLink, whatsappNumber } from '../data';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
@@ -16,7 +16,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <div className="flex justify-between h-20 items-center">
             <Link to="/" className="flex items-center gap-4">
               <div className="w-12 h-12 overflow-hidden bg-primary/5 rounded-full flex items-center justify-center border border-border">
-                <img src="/logo.webp" alt="Ammal Farm Logo" className="w-full h-full object-cover" />
+                <img src="/logo.jpeg" alt="Ammal Farm Logo" className="w-full h-full object-cover" />
               </div>
               <span className="font-serif text-2xl sm:text-3xl font-bold tracking-tight text-primary">Ammal Farm</span>
             </Link>
@@ -88,7 +88,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <div className="lg:col-span-1">
               <div className="flex items-center gap-4 mb-6">
                 <div className="w-16 h-16 overflow-hidden bg-white rounded-full flex items-center justify-center shadow-sm border border-border">
-                  <img src="/logo.webp" alt="Ammal Farm Logo" className="w-full h-full object-cover" />
+                  <img src="/logo.jpeg" alt="Ammal Farm Logo" className="w-full h-full object-cover" />
                 </div>
                 <div className="font-serif text-3xl text-primary leading-none">Ammal <br />Farm</div>
               </div>
@@ -108,7 +108,18 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                       <FaWhatsapp size={20} />
                     </div>
                     <div className="text-sm">
-                      <p className="font-bold text-primary group-hover:text-[#25D366] transition-colors">WhatsApp / Call</p>
+                      <p className="font-bold text-primary group-hover:text-[#25D366] transition-colors">WhatsApp Chat</p>
+                      <p className="text-text-muted">Direct Message</p>
+                    </div>
+                  </a>
+                </li>
+                <li>
+                  <a href={`tel:${whatsappNumber}`} className="flex gap-3 group cursor-pointer">
+                    <div className="text-primary shrink-0 group-hover:scale-110 transition-transform duration-300">
+                      <FaPhone size={18} />
+                    </div>
+                    <div className="text-sm">
+                      <p className="font-bold text-primary group-hover:text-accent transition-colors">Call Support</p>
                       <p className="text-text-muted">{whatsappNumber}</p>
                     </div>
                   </a>

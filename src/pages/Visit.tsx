@@ -1,4 +1,4 @@
-import { FaMapMarkerAlt, FaInstagram, FaWhatsapp } from 'react-icons/fa';
+import { FaMapMarkerAlt, FaInstagram, FaWhatsapp, FaPhone } from 'react-icons/fa';
 import { mapsLink, whatsappNumber } from '../data';
 
 export default function Visit() {
@@ -44,31 +44,46 @@ export default function Visit() {
           <p className="text-text-muted mb-12 text-sm leading-relaxed max-w-md">
             Experience our sustainable practices firsthand. We welcome serious buyers and farming enthusiasts for scheduled tours. Our facility is maintained to the highest hygiene standards.
           </p>
-          <div className="space-y-8">
-            <div className="flex gap-4 items-center">
-              <div className="p-3 bg-[#4285F4]/10 rounded-lg text-[#4285F4]">
+          <div className="space-y-6">
+            <a href={mapsLink} target="_blank" rel="no-referrer" className="flex gap-4 items-center group cursor-pointer p-2 -ml-2 rounded-xl hover:bg-stone-50 transition-all duration-300">
+              <div className="p-4 bg-[#4285F4]/10 rounded-xl text-[#4285F4] group-hover:scale-110 transition-transform duration-300">
                 <FaMapMarkerAlt size={24} />
               </div>
               <div>
-                <a href={mapsLink} target="_blank" rel="no-referrer" className="text-sm font-bold hover:text-[#4285F4] underline decoration-[#4285F4] transition-all">Google Maps Guide</a>
+                <p className="text-[10px] uppercase font-bold tracking-widest text-[#4285F4] mb-1">Google Maps</p>
+                <div className="text-sm font-bold group-hover:underline decoration-[#4285F4]">View Farm Directions</div>
               </div>
-            </div>
-            <div className="flex gap-4 items-center">
-              <div className="p-3 bg-[#E4405F]/10 rounded-lg text-[#E4405F]">
+            </a>
+
+            <a href="https://instagram.com/ammal_farm" target="_blank" rel="no-referrer" className="flex gap-4 items-center group cursor-pointer p-2 -ml-2 rounded-xl hover:bg-stone-50 transition-all duration-300">
+              <div className="p-4 bg-[#E4405F]/10 rounded-xl text-[#E4405F] group-hover:scale-110 transition-transform duration-300">
                 <FaInstagram size={24} />
               </div>
               <div>
-                <a href="https://instagram.com/ammal_farm" target="_blank" rel="no-referrer" className="text-sm font-bold text-primary hover:text-[#E4405F] underline decoration-[#E4405F] decoration-dotted">@ammal_farm</a>
+                <p className="text-[10px] uppercase font-bold tracking-widest text-[#E4405F] mb-1">Official Instagram</p>
+                <div className="text-sm font-bold text-primary group-hover:underline decoration-[#E4405F]">@ammal_farm</div>
               </div>
-            </div>
-            <div className="flex gap-4 items-center">
-              <div className="p-3 bg-[#25D366]/10 rounded-lg text-[#25D366]">
+            </a>
+
+            <a href={`https://wa.me/${whatsappNumber.replace(/\+/g, '')}`} target="_blank" rel="no-referrer" className="flex gap-4 items-center group cursor-pointer p-2 -ml-2 rounded-xl hover:bg-stone-50 transition-all duration-300">
+              <div className="p-4 bg-[#25D366]/10 rounded-xl text-[#25D366] group-hover:scale-110 transition-transform duration-300">
                 <FaWhatsapp size={24} />
               </div>
               <div>
-                <a href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="no-referrer" className="text-sm font-bold text-primary hover:text-[#25D366] underline decoration-[#25D366] decoration-dotted">Direct Chat Support</a>
+                <p className="text-[10px] uppercase font-bold tracking-widest text-[#25D366] mb-1">Direct Chat</p>
+                <div className="text-sm font-bold text-primary group-hover:underline decoration-[#25D366]">Support on WhatsApp</div>
               </div>
-            </div>
+            </a>
+
+            <a href={`tel:${whatsappNumber}`} className="flex gap-4 items-center group cursor-pointer p-2 -ml-2 rounded-xl hover:bg-stone-50 transition-all duration-300">
+              <div className="p-4 bg-primary/10 rounded-xl text-primary group-hover:scale-110 transition-transform duration-300">
+                <FaPhone size={24} />
+              </div>
+              <div>
+                <p className="text-[10px] uppercase font-bold tracking-widest text-primary mb-1">Call Us Directly</p>
+                <div className="text-sm font-bold text-primary group-hover:underline decoration-primary">{whatsappNumber}</div>
+              </div>
+            </a>
           </div>
 
           <div className="mt-12 h-[300px] w-full border border-border shadow-sm">
