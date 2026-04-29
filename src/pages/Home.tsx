@@ -37,7 +37,7 @@ export default function Home() {
         >
           <div className="aspect-[4/3] overflow-hidden">
             <img 
-              src="/farm-herd.png" 
+              src="/farm-herd.jpg" 
               alt="Ammal Farm Herd" 
               className="w-full h-full object-cover"
               referrerPolicy="no-referrer"
