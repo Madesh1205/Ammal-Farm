@@ -11,22 +11,32 @@ export default function Poultry() {
               Our poultry are raised in a stress-free, natural environment to ensure the highest nutritional value and taste.
             </p>
             <div className="flex flex-col border-t border-border">
-              {POULTRY.map((item) => (
-                <div key={item.name} className="flex justify-between items-center py-5 border-b border-border group">
-                  <div className="flex gap-4 items-center">
-                    <div className="w-12 h-12 overflow-hidden border border-border">
-                      <img src={item.image} alt={item.name} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+                {POULTRY.map((item) => (
+                  <div key={item.name} className="flex justify-between items-center py-5 border-b border-border group">
+                    <div className="flex gap-4 items-center">
+                      <div className="w-12 h-12 overflow-hidden border border-border">
+                        <img src={item.image} alt={item.name} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-sm tracking-tight">{item.name}</h4>
+                        <p className="text-[11px] text-text-muted uppercase tracking-wider">{item.type}</p>
+                      </div>
                     </div>
-                    <div>
-                      <h4 className="font-bold text-sm tracking-tight">{item.name}</h4>
-                      <p className="text-[11px] text-text-muted uppercase tracking-wider">{item.type}</p>
+                    <div className="flex items-center gap-4">
+                      <span className={`hidden sm:inline-block text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-sm ${item.status ? 'bg-amber-50 text-amber-900 border border-amber-200' : 'bg-stone-50 text-stone-500'}`}>
+                        {item.status ? 'Seasonal' : 'Year Round'}
+                      </span>
+                      <a 
+                        href={`https://wa.me/${whatsappNumber.replace(/\+/g, '')}?text=${encodeURIComponent(`i am intested in buying ${item.name} what wil be the price?`)}`}
+                        target="_blank"
+                        rel="no-referrer"
+                        className="text-[10px] uppercase font-bold text-accent border-b border-accent hover:text-primary hover:border-primary transition-all"
+                      >
+                        Inquire
+                      </a>
                     </div>
                   </div>
-                  <span className={`text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-sm ${item.status ? 'bg-amber-50 text-amber-900 border border-amber-200' : 'bg-stone-50 text-stone-500'}`}>
-                    {item.status ? 'Seasonal' : 'Year Round'}
-                  </span>
-                </div>
-              ))}
+                ))}
             </div>
           </div>
 
@@ -36,6 +46,9 @@ export default function Poultry() {
                 Daily Fresh Selection
               </h3>
               <div className="space-y-8">
+                <p className="text-stone-300 text-[11px] uppercase tracking-[0.2em] font-medium opacity-80 border-b border-white/10 pb-4 mb-8">
+                  Available for daily retail purchase
+                </p>
                 {EGGS.map(egg => (
                   <div key={egg.name} className="border-l-2 border-accent/40 pl-6">
                     <p className="font-bold text-lg">{egg.name}</p>
@@ -46,12 +59,12 @@ export default function Poultry() {
               </div>
             </div>
             <a 
-              href={`https://wa.me/${whatsappNumber}`}
+              href={`https://wa.me/${whatsappNumber.replace(/\+/g, '')}?text=${encodeURIComponent('Hi Ammal Farm, i am interested in buying some farm products. could you please share the latest price list?')}`}
               target="_blank"
               rel="no-referrer"
               className="mt-12 bg-accent py-4 text-center text-xs font-bold uppercase tracking-widest hover:bg-white hover:text-primary transition-all"
             >
-              Inquire Wholesale Batch
+              Order Now
             </a>
           </div>
         </div>

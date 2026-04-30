@@ -1,0 +1,23 @@
+{
+  "entities": {
+    "visitRequest": {
+      "title": "Visit Request",
+      "description": "A request for a farm visit or livestock inquiry.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "description": "Full name of the requester" },
+        "phone": { "type": "string", "description": "10-digit Indian phone number" },
+        "date": { "type": "string", "description": "Preferred date of visit" },
+        "type": { "type": "string", "description": "Type of inquiry" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Timestamp of request creation" }
+      },
+      "required": ["name", "phone", "date", "type", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/visitRequests/{requestId}": {
+      "schema": "visitRequest",
+      "description": "Collection of visit requests submitted by users."
+    }
+  }
+}

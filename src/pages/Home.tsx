@@ -16,8 +16,8 @@ export default function Home() {
             <span className="italic font-normal">Livestock.</span>
           </h1>
           <p className="text-text-muted text-lg mb-10 max-w-lg leading-relaxed font-medium">
-            Ammal Farm provides the gold standard in Nellore Judipi and Salem Black breeds. 
-            Rooted in health, transparency, and quality breeding.
+            Ammal Farm provides the gold standard in Nellore Judipi and Salem Black livestock. 
+            Rooted in health, transparency, and quality care.
           </p>
           <div className="flex flex-wrap gap-4">
             <Link to="/livestock" className="bg-accent text-white px-10 py-5 font-bold uppercase tracking-widest text-xs hover:shadow-xl transition-all">

@@ -3,7 +3,7 @@ export const GOATS = [
     id: 'nellore-judipi',
     name: 'Nellore Judipi',
     aka: 'Bakrid Goats',
-    description: 'Premium breed known for its majestic height, distinctive long ears, and strong build. Highly sought after for religious festivals and premium meat quality.',
+    description: 'Premium livestock known for its majestic height, distinctive long ears, and strong build. Highly sought after for religious festivals and premium meat quality.',
     image: '/nellore-judipi.jpg',
     tags: ['Premium', 'Sturdy', 'Majestic']
   },
@@ -11,17 +11,17 @@ export const GOATS = [
     id: 'salem-black',
     name: 'Salem Black',
     aka: 'Local Pride',
-    description: 'A hardy, sleek black breed indigenous to the region. Excellent adaptability and meat yield. Perfect for local farming environments.',
+    description: 'A hardy, sleek black livestock indigenous to the region. Excellent adaptability and meat yield. Perfect for local farming environments.',
     image: '/salem-black.jpg',
     tags: ['Hardy', 'Lean Meat', 'Indigenous']
   }
 ];
 
 export const POULTRY = [
-  { name: 'Country Chicken', type: 'Meat & Eggs', image: 'https://images.unsplash.com/photo-1548550023-2bdb3c5beed7?auto=format&fit=crop&q=80&w=600' },
-  { name: 'Black Chicken', type: 'Medicinal/Kadaknath', image: 'https://images.unsplash.com/photo-1612170153139-6f881ff067e0?auto=format&fit=crop&q=80&w=600' },
-  { name: 'Turkey', type: 'Seasonal', status: 'Limited Availability', image: 'https://images.unsplash.com/photo-1529124446452-9f33ae5667af?auto=format&fit=crop&q=80&w=600' },
-  { name: 'Ducks', type: 'Seasonal', status: 'Limited Availability', image: 'https://images.unsplash.com/photo-1555854816-801332bcc324?auto=format&fit=crop&q=80&w=600' }
+  { name: 'Country Chicken', type: 'Meat & Eggs', image: '/country-chicken.jpg' },
+  { name: 'Black Chicken', type: 'Medicinal/Kadaknath', image: '/black-chicken.jpg' },
+  { name: 'Turkey', type: 'Seasonal', status: 'Limited Availability', image: '/turkey.jpg' },
+  { name: 'Ducks', type: 'Seasonal', status: 'Limited Availability', image: '/ducks.jpg' }
 ];
 
 export const EGGS = [

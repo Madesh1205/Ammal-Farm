@@ -22,7 +22,7 @@
 ### Livestock Catalog Specification
 - **Goats**: 
   - **Nellore Judipi**: Known as Bakrid goats, premium quality.
-  - **Salem Black**: Local hardy breed.
+  - **Salem Black**: Local hardy livestock.
 - **Poultry**: Country Chicken, Black Chicken (Kadaknath style), Turkey, Ducks.
 - **Eggs**: Fresh farm eggs (Chicken, Turkey, Duck).
 

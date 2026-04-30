@@ -28,7 +28,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               <NavLink to="/poultry" className={({ isActive }) => isActive ? "text-primary border-b-2 border-primary" : "hover:text-primary transition-colors"}>Poultry & Eggs</NavLink>
               <NavLink to="/visit" className={({ isActive }) => isActive ? "text-primary border-b-2 border-primary" : "hover:text-primary transition-colors"}>Farm Visit</NavLink>
               <div className="flex items-center gap-4 ml-4 pl-4 border-l border-border">
-                <a href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="no-referrer" className="text-[#25D366] hover:opacity-80 transition-opacity" title="WhatsApp">
+                <a href={`https://wa.me/${whatsappNumber.replace(/\+/g, '')}?text=${encodeURIComponent('Hi Ammal Farm, i have an inquiry regarding your products.')}`} target="_blank" rel="no-referrer" className="text-[#25D366] hover:opacity-80 transition-opacity" title="WhatsApp">
                   <FaWhatsapp size={22} />
                 </a>
                 <a href="https://instagram.com/ammal_farm" target="_blank" rel="no-referrer" className="text-[#E4405F] hover:opacity-80 transition-opacity" title="Instagram">
@@ -61,7 +61,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               <Link to="/poultry" onClick={() => setIsMenuOpen(false)}>Poultry</Link>
               <Link to="/visit" onClick={() => setIsMenuOpen(false)}>Farm Visit</Link>
               <div className="flex justify-center gap-8 py-4 border-t border-border mt-2">
-                <a href={`https://wa.me/${whatsappNumber}`} className="text-[#25D366] flex items-center gap-2">
+                <a href={`https://wa.me/${whatsappNumber.replace(/\+/g, '')}?text=${encodeURIComponent('Hi Ammal Farm, i have an inquiry regarding your products.')}`} className="text-[#25D366] flex items-center gap-2">
                    <FaWhatsapp size={24} />
                 </a>
                 <a href="https://instagram.com/ammal_farm" className="text-[#E4405F] flex items-center gap-2">
@@ -93,7 +93,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 <div className="font-serif text-3xl text-primary leading-none">Ammal <br />Farm</div>
               </div>
               <p className="text-xs uppercase tracking-[0.2em] font-bold text-text-muted leading-relaxed">
-                Growing Trust • Breeding Excellence. <br />
+                Growing Trust. <br />
                 A Habitat for Growth.
               </p>
             </div>
@@ -103,7 +103,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               <h4 className="text-[10px] uppercase font-bold tracking-[0.3em] text-primary mb-6">Reach Out</h4>
               <ul className="space-y-6">
                 <li>
-                  <a href={`https://wa.me/${whatsappNumber.replace(/\+/g, '')}`} target="_blank" rel="no-referrer" className="flex gap-3 group cursor-pointer">
+                  <a href={`https://wa.me/${whatsappNumber.replace(/\+/g, '')}?text=${encodeURIComponent('Hi Ammal Farm, i have an inquiry regarding your products.')}`} target="_blank" rel="no-referrer" className="flex gap-3 group cursor-pointer">
                     <div className="text-[#25D366] shrink-0 group-hover:scale-110 transition-transform duration-300">
                       <FaWhatsapp size={20} />
                     </div>

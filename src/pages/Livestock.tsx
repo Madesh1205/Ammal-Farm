@@ -7,7 +7,7 @@ export default function Livestock() {
       <div className="max-w-7xl mx-auto px-4">
         <div className="grid lg:grid-cols-[1fr_2fr] gap-16">
           <div className="lg:sticky lg:top-32 h-fit">
-            <h2 className="text-4xl font-bold mb-6">Specialty <br/>Breeds</h2>
+            <h2 className="text-4xl font-bold mb-6">Specialty <br/>Selection</h2>
             <p className="text-text-muted mb-8 text-sm leading-relaxed">
               Inquiry-based pricing ensures you get the best current market value for elite, healthy livestock.
             </p>
@@ -26,7 +26,7 @@ export default function Livestock() {
                 viewport={{ once: true }}
                 className="bg-white border border-border p-6 flex flex-col group"
               >
-                <span className="text-[10px] uppercase font-bold text-accent tracking-widest mb-4">Featured Breed</span>
+                <span className="text-[10px] uppercase font-bold text-accent tracking-widest mb-4">Featured Selection</span>
                 <div className="aspect-square overflow-hidden mb-6 bg-stone-50">
                   <img src={goat.image} alt={goat.name} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
                 </div>
@@ -35,7 +35,7 @@ export default function Livestock() {
                   {goat.description}
                 </p>
                 <a 
-                  href={`https://wa.me/${whatsappNumber}?text=Hi, I am interested in ${goat.name} goats.`}
+                  href={`https://wa.me/${whatsappNumber.replace(/\+/g, '')}?text=${encodeURIComponent(`i am intested in buying ${goat.name} what wil be the price?`)}`}
                   target="_blank"
                   rel="no-referrer"
                   className="block w-full py-4 bg-primary text-white text-center text-xs font-bold uppercase tracking-widest hover:bg-accent transition-colors"

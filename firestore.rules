@@ -1,0 +1,39 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // 0. Global Safety Net
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // --- Helpers ---
+    function isSignedIn() { return request.auth != null; }
+    function isVerified() { return isSignedIn() && request.auth.token.email_verified == true; }
+    function isAdmin() { return isVerified() && request.auth.token.email == 'madesh1205@gmail.com'; }
+    function isValidId(id) { return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$'); }
+    function incoming() { return request.resource.data; }
+    function existing() { return resource.data; }
+
+    // --- Validation Blueprints ---
+    function isValidVisitRequest(data) {
+      return data.keys().hasAll(['name', 'phone', 'date', 'type', 'fullPhone', 'createdAt']) &&
+             data.keys().size() == 6 &&
+             data.name is string && data.name.size() >= 2 && data.name.size() <= 100 &&
+             data.phone is string && data.phone.size() == 10 && data.phone.matches('^[0-9]{10}$') &&
+             data.fullPhone is string && data.fullPhone == '+91' + data.phone &&
+             data.date is string && data.date.size() >= 8 && data.date.size() <= 20 &&
+             data.type is string && data.type.size() >= 3 && data.type.size() <= 100 &&
+             data.createdAt == request.time;
+    }
+
+    // --- Collections ---
+    match /visitRequests/{requestId} {
+      // Identity Integrity & ID Poisoning Guard
+      allow create: if isValidId(requestId) && isValidVisitRequest(incoming());
+      
+      // Admin Access
+      allow read: if isAdmin();
+      allow update, delete: if isAdmin();
+    }
+  }
+}
