@@ -6,9 +6,9 @@ export default function Poultry() {
       <div className="max-w-7xl mx-auto px-4">
         <div className="grid md:grid-cols-2 gap-16">
           <div className="space-y-4">
-            <h2 className="text-4xl font-bold mb-8">Poultry Selection</h2>
-            <p className="text-text-muted mb-8 text-sm max-w-md">
-              Our poultry are raised in a stress-free, natural environment to ensure the highest nutritional value and taste.
+            <h1 className="text-4xl font-bold mb-8">Premium Poultry & Eggs in Tamil Nadu</h1>
+            <p className="text-text-muted mb-8 text-sm max-w-md leading-relaxed">
+              Searching for a <span className="font-bold text-accent">country chicken farm near me</span>? Ammal Farm provides high-quality free-range poultry, raised naturally in Tamil Nadu.
             </p>
             <div className="flex flex-col border-t border-border">
                 {POULTRY.map((item) => (

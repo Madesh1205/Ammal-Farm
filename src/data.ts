@@ -1,27 +1,27 @@
 export const GOATS = [
   {
     id: 'nellore-judipi',
-    name: 'Nellore Judipi',
-    aka: 'Bakrid Goats',
-    description: 'Premium livestock known for its majestic height, distinctive long ears, and strong build. Highly sought after for religious festivals and premium meat quality.',
+    name: 'Nellore Judipi Goats',
+    aka: 'Bakrid Goats Tamil Nadu',
+    description: 'Premium livestock known for its majestic height and strong build. Ammal Farm is a leading supplier of Nellore Judipi goats in Tamil Nadu, highly sought after for religious festivals and premium meat quality.',
     image: '/nellore-judipi.jpg',
-    tags: ['Premium', 'Sturdy', 'Majestic']
+    tags: ['Premium', 'Tamil Nadu', 'Bakrid Special']
   },
   {
     id: 'salem-black',
-    name: 'Salem Black',
-    aka: 'Local Pride',
-    description: 'A hardy, sleek black livestock indigenous to the region. Excellent adaptability and meat yield. Perfect for local farming environments.',
+    name: 'Salem Black Goats',
+    aka: 'Local Tamil Nadu Breed',
+    description: 'A hardy, sleek black livestock indigenous to the Salem region of Tamil Nadu. Known for excellent adaptability and meat yield, these are the best goats for local farming environments.',
     image: '/salem-black.jpg',
-    tags: ['Hardy', 'Lean Meat', 'Indigenous']
+    tags: ['Hardy', 'Indigenous Breed', 'Tamil Nadu']
   }
 ];
 
 export const POULTRY = [
-  { name: 'Country Chicken', type: 'Meat & Eggs', image: '/country-chicken.jpg' },
-  { name: 'Black Chicken', type: 'Medicinal/Kadaknath', image: '/black-chicken.jpg' },
-  { name: 'Turkey', type: 'Seasonal', status: 'Limited Availability', image: '/turkey.jpg' },
-  { name: 'Ducks', type: 'Seasonal', status: 'Limited Availability', image: '/ducks.jpg' }
+  { name: 'Country Chicken (Nattu Kozhi)', type: 'Free Range - Tamil Nadu', image: '/country-chicken.jpg' },
+  { name: 'Kadaknath (Black Chicken)', type: 'Medicinal Value - TN', image: '/black-chicken.jpg' },
+  { name: 'Turkey (Van Kozhi)', type: 'Seasonal Special', status: 'Limited Availability', image: '/turkey.jpg' },
+  { name: 'Ducks (Vaathu)', type: 'Farm Raised', status: 'Year Round', image: '/ducks.jpg' }
 ];
 
 export const EGGS = [

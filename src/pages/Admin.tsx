@@ -18,6 +18,7 @@ export default function Admin() {
   const [requests, setRequests] = useState<VisitRequest[]>([]);
   const [loading, setLoading] = useState(true);
   const [notificationsEnabled, setNotificationsEnabled] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const unsubscribeAuth = onAuthStateChanged(auth, (u) => {
@@ -29,8 +30,33 @@ export default function Admin() {
       setNotificationsEnabled(Notification.permission === 'granted');
     }
 
+    // Test connectivity on mount
+    import('../lib/firebase').then(({ testFirestoreConnection }) => {
+      testFirestoreConnection().then(status => {
+        if (status === 'UNAVAILABLE') {
+          setError('Could not connect to Firebase. If you just deployed, please wait a few minutes or check your internet connection.');
+        }
+      });
+    });
+
     return () => unsubscribeAuth();
   }, []);
+
+  const handleSignIn = async () => {
+    setError(null);
+    try {
+      await signInWithGoogle();
+    } catch (err: any) {
+      console.error("Sign-in error details:", err);
+      if (err.code === 'auth/popup-blocked') {
+        setError('Popup was blocked by your browser. Please allow popups or try opening the app in a new tab.');
+      } else if (err.code === 'auth/unauthorized-domain') {
+        setError(`This domain is not authorized in Firebase. Please add "${window.location.hostname}" to your Firebase Console under Authentication > Settings > Authorized Domains.`);
+      } else {
+        setError(err.message || 'Failed to sign in. Please check if your domain is authorized in Firebase Console.');
+      }
+    }
+  };
 
   useEffect(() => {
     if (!user || user.email !== 'madesh1205@gmail.com') return;
@@ -81,12 +107,24 @@ export default function Admin() {
           </div>
           <h2 className="text-xl font-bold tracking-tight mb-2">Admin Access Only</h2>
           <p className="text-stone-500 text-sm mb-8">Please sign in with the authorized administrator email to view requests.</p>
+          
+          {error && (
+            <div className="mb-6 p-4 bg-red-50 border border-red-100 text-red-600 text-xs font-medium leading-relaxed rounded">
+              {error}
+            </div>
+          )}
+
           <button 
-            onClick={signInWithGoogle}
+            onClick={handleSignIn}
             className="w-full flex items-center justify-center gap-3 py-4 bg-primary text-white font-bold uppercase tracking-widest text-xs hover:bg-accent transition-all"
           >
             <FaGoogle size={16} /> Sign In with Google
           </button>
+
+          <p className="mt-8 text-[10px] text-stone-400 uppercase tracking-widest">
+            Trouble logging in? <br className="md:hidden" /> 
+            Open the app in a new tab using the "Open App" button above.
+          </p>
         </div>
       </div>
     );

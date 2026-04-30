@@ -80,21 +80,43 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         {children}
       </main>
 
-      {/* Footer */}
+      {/* Floating Action Buttons */}
+      <div className="fixed bottom-6 right-6 z-[60] flex flex-col gap-4">
+        <a 
+          href={`tel:${whatsappNumber}`}
+          className="w-14 h-14 bg-accent text-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform duration-300"
+          title="Call Now"
+        >
+          <FaPhone size={20} />
+        </a>
+        <a 
+          href={`https://wa.me/${whatsappNumber.replace(/\+/g, '')}?text=${encodeURIComponent('Hi Ammal Farm, i have an inquiry regarding your products.')}`}
+          target="_blank"
+          rel="no-referrer"
+          className="w-14 h-14 bg-[#25D366] text-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform duration-300"
+          title="Chat on WhatsApp"
+        >
+          <FaWhatsapp size={26} />
+        </a>
+      </div>
+
       <footer className="bg-stone-50 pt-24 pb-12 border-t border-border">
+        <div className="max-w-7xl mx-auto px-4 text-center mb-12 sm:text-left">
+          <p className="text-[10px] uppercase font-bold tracking-[0.4em] text-accent mb-4">Ammal Farm: Tamil Nadu's Premier Goat & Poultry Hub</p>
+        </div>
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 pb-16 border-b border-border mb-12">
             {/* Brand Section */}
             <div className="lg:col-span-1">
               <div className="flex items-center gap-4 mb-6">
                 <div className="w-16 h-16 overflow-hidden bg-white rounded-full flex items-center justify-center shadow-sm border border-border">
-                  <img src="/logo.jpeg" alt="Ammal Farm Logo" className="w-full h-full object-cover" />
+                  <img src="/logo.jpeg" alt="Ammal Farm Logo in Tamil Nadu" className="w-full h-full object-cover" />
                 </div>
                 <div className="font-serif text-3xl text-primary leading-none">Ammal <br />Farm</div>
               </div>
               <p className="text-xs uppercase tracking-[0.2em] font-bold text-text-muted leading-relaxed">
                 Growing Trust. <br />
-                A Habitat for Growth.
+                Tamil Nadu, India.
               </p>
             </div>
 

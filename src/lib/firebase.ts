@@ -1,11 +1,32 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth';
-import { getFirestore } from 'firebase/firestore';
+import { getFirestore, doc, getDocFromServer } from 'firebase/firestore';
 import firebaseConfig from '../../firebase-applet-config.json';
 
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app, firebaseConfig.firestoreDatabaseId);
 export const auth = getAuth(app);
+
+// Connectivity Test for Production
+export async function testFirestoreConnection() {
+  try {
+    // Attempt to read a non-existent doc to test connectivity
+    await getDocFromServer(doc(db, '_internal_', 'connection_test'));
+    console.log('Firebase connection successful');
+    return true;
+  } catch (error: any) {
+    if (error.message?.includes('the client is offline') || error.code === 'unavailable') {
+      return 'UNAVAILABLE';
+    }
+    // We expect a "permission-denied" which means we ARE connected but just don't have access to this test path
+    if (error.code === 'permission-denied') {
+      console.log('Firebase connection successful (permission denied on test path)');
+      return true;
+    }
+    console.error('Firebase Connectivity Error:', error);
+    return false;
+  }
+}
 
 const provider = new GoogleAuthProvider();
 

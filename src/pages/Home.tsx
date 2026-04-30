@@ -56,6 +56,58 @@ export default function Home() {
           "Healthy goats, trusted source, growing farm."
         </div>
       </div>
+
+      {/* Local SEO Section */}
+      <div className="max-w-7xl mx-auto mt-24">
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <div className="order-2 lg:order-1">
+            <h2 className="text-4xl font-bold tracking-tight mb-8 text-primary uppercase">
+              Best Goat Farm in Tamil Nadu – Ammal Farm
+            </h2>
+            <div className="space-y-6 text-stone-600 leading-relaxed text-sm">
+              <p>
+                If you are searching for a <strong>goat farm near me</strong>, Ammal Farm is a trusted choice in <strong>Tamil Nadu</strong>. 
+                Our farm is strategically located in the heart of the region, serving districts like <strong>Vellore, Chennai, and nearby villages</strong> with premium livestock. 
+                We specialize in rearing healthy, high-yield goats including the majestic <strong>Nellore Judipi</strong> and the resilient <strong>Salem Black</strong> goats.
+              </p>
+              <p>
+                At Ammal Farm, we understand the local climate and farming needs of <strong>Tamil Nadu</strong>. 
+                Whether you need goats for breeding, commercial farming, or the religious <strong>Bakrid festivals</strong>, 
+                our animals are raised with scientific care and natural fodder to ensure they are the best available in <strong>Tamil Nadu</strong>.
+              </p>
+              <p>
+                Beyond livestock, we are proud to offer high-quality <strong>country chicken, ducks, and turkey</strong>. 
+                Our poultry farming practices ensure stress-free birds, making us a top-rated poultry source for those looking for 
+                <strong>country chicken farm near me</strong> in the southern districts.
+              </p>
+              <div className="pt-6">
+                 <Link to="/visit" className="text-accent font-bold uppercase tracking-widest text-xs border-b-2 border-accent pb-1 hover:text-primary hover:border-primary transition-all">
+                   Visit our farm in Tamil Nadu
+                 </Link>
+              </div>
+            </div>
+          </div>
+          <div className="order-1 lg:order-2">
+            <div className="bg-white p-4 border border-border shadow-lg">
+               <div className="aspect-square bg-stone-100 flex items-center justify-center overflow-hidden">
+                 {/* Google Maps Embed */}
+                 <iframe 
+                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.337236971118!2d78.95594489999999!3d12.950259299999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bad6b087827aa4b%3A0x251c06481adad7f8!2sAMMAL%20FARM!5e0!3m2!1sen!2sin!4v1777537594540!5m2!1sen!2sin" 
+                   className="w-full h-full border-0" 
+                   allowFullScreen={true}
+                   loading="lazy" 
+                   referrerPolicy="no-referrer-when-downgrade"
+                   title="Ammal Farm Location Map"
+                 ></iframe>
+               </div>
+               <div className="mt-4 flex items-center justify-between text-[10px] uppercase font-bold tracking-widest text-stone-400">
+                  <span>Vellore District</span>
+                  <span>Tamil Nadu, India</span>
+               </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
   );
 }

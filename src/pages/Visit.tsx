@@ -160,9 +160,9 @@ export default function Visit() {
         </div>
         
         <div className="lg:pl-12">
-          <h2 className="text-4xl font-bold mb-8">Visit The Farm</h2>
-          <p className="text-text-muted mb-12 text-sm leading-relaxed max-w-md">
-            Experience our sustainable practices firsthand. We welcome serious buyers and farming enthusiasts for scheduled tours. Our facility is maintained to the highest hygiene standards.
+          <h2 className="text-4xl font-bold mb-8 uppercase tracking-tight">Visit Ammal Farm</h2>
+          <p className="text-text-muted mb-12 text-sm leading-relaxed max-w-xl">
+            Experience the best <span className="font-bold text-accent">goat farm in Tamil Nadu</span> firsthand. We welcome serious buyers, fellow farmers, and families looking for a <span className="font-bold text-accent">goat farm near me</span> for weekend visits. Our facility in Vellore district follows natural rearing practices that define our quality.
           </p>
           <div className="space-y-6">
             <a href={mapsLink} target="_blank" rel="no-referrer" className="flex gap-4 items-center group cursor-pointer p-2 -ml-2 rounded-xl hover:bg-stone-50 transition-all duration-300">
@@ -208,7 +208,7 @@ export default function Visit() {
 
           <div className="mt-12 h-[300px] w-full border border-border shadow-sm">
             <iframe 
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.337236971118!2d78.95594489999999!3d12.950259299999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bad6b087827aa4b%3A0x251c06481adad7f8!2sAMMAL%20FARM!5e0!3m2!1sen!2sin!4v1777397210576!5m2!1sen!2sin" 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.337236971118!2d78.95594489999999!3d12.950259299999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bad6b087827aa4b%3A0x251c06481adad7f8!2sAMMAL%20FARM!5e0!3m2!1sen!2sin!4v1777537594540!5m2!1sen!2sin" 
               width="100%" 
               height="100%" 
               style={{ border: 0 }} 
