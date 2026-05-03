@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 import Layout from './components/Layout';
 import Home from './pages/Home';
 import Livestock from './pages/Livestock';
@@ -32,6 +33,7 @@ export default function App() {
           <Route path="*" element={<Home />} />
         </Routes>
       </Layout>
+      <Analytics />
     </Router>
   );
 }
