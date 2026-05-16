@@ -1,6 +1,5 @@
 import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
-import InstagramFeed from '../components/InstagramFeed';
 import HeroCarousel from '../components/HeroCarousel';
 import GalleryCarousel from '../components/GalleryCarousel';
 
@@ -40,7 +39,12 @@ export default function Home() {
       {/* Gallery Call to Action */}
       <section className="py-24 bg-stone-900 overflow-hidden relative">
         <div className="absolute inset-0 opacity-20">
-          <img src="/farm-herd.jpg" className="w-full h-full object-cover grayscale" />
+          <img 
+            src="https://dlugisbcds8fnzdn.public.blob.vercel-storage.com/images/nellore-judipi.jpg" 
+            loading="lazy"
+            decoding="async"
+            className="w-full h-full object-cover" 
+          />
         </div>
         <div className="max-w-7xl mx-auto px-4 relative z-10 text-center">
           <motion.div
@@ -62,9 +66,6 @@ export default function Home() {
           </motion.div>
         </div>
       </section>
-
-      {/* Social Feed */}
-      <InstagramFeed />
 
       <section className="py-24 px-4 bg-white">
         {/* Local SEO Section */}

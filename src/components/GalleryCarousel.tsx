@@ -12,9 +12,9 @@ interface MediaItem {
 }
 
 const STATIC_GALLERY: MediaItem[] = [
-  { id: 's1', url: 'https://dlugisbcds8fnzdn.public.blob.vercel-storage.com/images/farm-herd.jpg', type: 'image', description: 'Our healthy farm herd' },
+  { id: 's1', url: 'https://dlugisbcds8fnzdn.public.blob.vercel-storage.com/images/nellore-judipi.jpg', type: 'image', description: 'Our healthy farm herd' },
   { id: 's2', url: 'https://dlugisbcds8fnzdn.public.blob.vercel-storage.com/images/nellore-judipi.jpg', type: 'image', description: 'Nellore Judipi Buck' },
-  { id: 's3', url: 'https://dlugisbcds8fnzdn.public.blob.vercel-storage.com/images/salem-black.jpg', type: 'image', description: 'Salem Black livestock' },
+  { id: 's3', url: 'https://dlugisbcds8fnzdn.public.blob.vercel-storage.com/images/salem%20black1.jpg', type: 'image', description: 'Salem Black livestock' },
   { id: 's4', url: 'https://dlugisbcds8fnzdn.public.blob.vercel-storage.com/images/country-chicken.jpg', type: 'image', description: 'Free-range country chicken' },
   { id: 's5', url: 'https://dlugisbcds8fnzdn.public.blob.vercel-storage.com/images/ducks.jpg', type: 'image', description: 'Farm ducks in habitat' },
   { id: 's6', url: 'https://dlugisbcds8fnzdn.public.blob.vercel-storage.com/images/black-chicken.jpg', type: 'image', description: 'Kadaknath poultry' },
@@ -144,16 +144,19 @@ export default function GalleryCarousel() {
                       muted
                       autoPlay
                       loop
+                      preload="auto"
                     />
                   ) : (
                     <img 
                       src={currentItem.url} 
                       alt={currentItem.description}
-                      className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000"
+                      loading="lazy"
+                      decoding="async"
+                      className="w-full h-full object-cover transition-all duration-1000"
                     />
                   )}
                   
-                  <div className="absolute inset-0 bg-stone-900/20 group-hover:bg-transparent transition-colors duration-500" />
+                  <div className="absolute inset-0 bg-stone-900/5 transition-colors duration-500" />
                   
                   {currentItem.type === 'video' && (
                     <div className="absolute top-6 right-6">

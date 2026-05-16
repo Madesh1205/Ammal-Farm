@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 const SLIDES = [
   {
-    image: 'https://dlugisbcds8fnzdn.public.blob.vercel-storage.com/images/farm-herd.jpg',
+    image: 'https://dlugisbcds8fnzdn.public.blob.vercel-storage.com/images/nellore-judipi.jpg',
     title: 'Precision Rearing',
     subtitle: 'The Gold Standard of Tamil Nadu',
     description: 'Specializing in Nellore Judipi and Salem Black goats with scientific nutrition and natural habitat.',
@@ -13,9 +13,9 @@ const SLIDES = [
     link: '/livestock'
   },
   {
-    image: 'https://dlugisbcds8fnzdn.public.blob.vercel-storage.com/images/nellore-judipi.jpg',
+    image: 'https://dlugisbcds8fnzdn.public.blob.vercel-storage.com/images/salem%20black1.jpg',
     title: 'Majestic Pedigree',
-    subtitle: 'Nellore Judipi Excellence',
+    subtitle: 'Salem Black Excellence',
     description: 'Sourcing the finest breeding lines to ensure superior growth rates and resilient livestock.',
     cta: 'Book a Visit',
     link: '/visit'
@@ -26,7 +26,7 @@ const SLIDES = [
     subtitle: 'Natural Nattu Kozhi',
     description: 'Free-range country chickens and ducks raised without growth hormones in stress-free environments.',
     cta: 'Explore Poultry',
-    link: '/livestock'
+    link: '/poultry'
   }
 ];
 
@@ -62,6 +62,7 @@ export default function HeroCarousel() {
             <img 
               src={SLIDES[current].image} 
               alt={SLIDES[current].title} 
+              decoding="async"
               className="w-full h-full object-cover opacity-60 scale-105"
             />
             <div className="absolute inset-0 bg-gradient-to-r from-stone-900/80 via-stone-900/40 to-transparent" />

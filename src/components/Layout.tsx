@@ -16,7 +16,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <div className="flex justify-between h-20 items-center">
             <Link to="/" className="flex items-center gap-4">
               <div className="w-12 h-12 overflow-hidden bg-primary/5 rounded-full flex items-center justify-center border border-border">
-                <img src="https://dlugisbcds8fnzdn.public.blob.vercel-storage.com/images/logo.jpeg" alt="Ammal Farm Logo" className="w-full h-full object-cover" />
+                <img 
+                  src="https://dlugisbcds8fnzdn.public.blob.vercel-storage.com/images/logo.jpeg" 
+                  alt="Ammal Farm Logo" 
+                  decoding="async"
+                  className="w-full h-full object-cover" 
+                />
               </div>
               <span className="font-serif text-2xl sm:text-3xl font-bold tracking-tight text-primary">Ammal Farm</span>
             </Link>
@@ -112,7 +117,13 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <div className="lg:col-span-1">
               <div className="flex items-center gap-4 mb-6">
                 <div className="w-16 h-16 overflow-hidden bg-white rounded-full flex items-center justify-center shadow-sm border border-border">
-                  <img src="https://dlugisbcds8fnzdn.public.blob.vercel-storage.com/images/logo.jpeg" alt="Ammal Farm Logo in Tamil Nadu" className="w-full h-full object-cover" />
+                  <img 
+                    src="https://dlugisbcds8fnzdn.public.blob.vercel-storage.com/images/logo.jpeg" 
+                    alt="Ammal Farm Logo in Tamil Nadu" 
+                    loading="lazy"
+                    decoding="async"
+                    className="w-full h-full object-cover" 
+                  />
                 </div>
                 <div className="font-serif text-3xl text-primary leading-none">Ammal <br />Farm</div>
               </div>

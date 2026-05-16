@@ -65,7 +65,8 @@ export default function Gallery({ items, title, subtitle }: GalleryProps) {
                     src={item.url} 
                     muted 
                     playsInline
-                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700" 
+                    preload="metadata"
+                    className="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" 
                   />
                   <div className="absolute top-2 right-2 z-10">
                     <div className="bg-black/40 backdrop-blur-sm px-2 py-1 flex items-center gap-1.5 rounded">
@@ -78,7 +79,9 @@ export default function Gallery({ items, title, subtitle }: GalleryProps) {
                 <img 
                   src={item.url} 
                   alt={item.description}
-                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700"
+                  loading="lazy"
+                  decoding="async"
+                  className="w-full h-full object-cover group-hover:scale-110 transition-all duration-700"
                 />
               )}
               
@@ -147,12 +150,14 @@ export default function Gallery({ items, title, subtitle }: GalleryProps) {
                         src={items[selectedIdx].url} 
                         controls 
                         autoPlay 
+                        preload="auto"
                         className="max-w-full max-h-[80vh] object-contain shadow-2xl"
                       />
                     ) : (
                       <img 
                         src={items[selectedIdx].url} 
                         alt={items[selectedIdx].description}
+                        decoding="async"
                         className="max-w-full max-h-[80vh] object-contain shadow-2xl"
                       />
                     )}
