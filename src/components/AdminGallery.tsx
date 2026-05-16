@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { db, storage, handleFirestoreError, OperationType } from '../lib/firebase';
-import { ref, uploadBytes, uploadBytesResumable, getDownloadURL, deleteObject } from 'firebase/storage';
+import { ref, deleteObject } from 'firebase/storage';
 import { collection, addDoc, query, orderBy, onSnapshot, deleteDoc, doc, serverTimestamp, Timestamp } from 'firebase/firestore';
 import { FaCloudUploadAlt, FaTrash, FaPlayCircle, FaImage, FaSpinner, FaImages, FaInfoCircle } from 'react-icons/fa';
 
