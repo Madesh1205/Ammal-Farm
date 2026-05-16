@@ -26,7 +26,7 @@ export default function GalleryCarousel() {
   const [items, setItems] = useState<MediaItem[]>(STATIC_GALLERY);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
-  const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   useEffect(() => {
     const q = query(collection(db, 'media'), orderBy('createdAt', 'desc'), limit(12));
