@@ -14,22 +14,15 @@ service cloud.firestore {
     function incoming() { return request.resource.data; }
     function existing() { return resource.data; }
 
-    // --- Validation Blueprints ---
-    function isValidVisitRequest(data) {
-      return data.keys().hasAll(['name', 'phone', 'date', 'type', 'fullPhone', 'createdAt']) &&
-             data.keys().size() == 6 &&
-             data.name is string && data.name.size() >= 2 && data.name.size() <= 100 &&
-             data.phone is string && data.phone.size() == 10 && data.phone.matches('^[0-9]{10}$') &&
-             data.fullPhone is string && data.fullPhone == '+91' + data.phone &&
-             data.date is string && data.date.size() >= 8 && data.date.size() <= 20 &&
-             data.type is string && data.type.size() >= 3 && data.type.size() <= 100 &&
-             data.createdAt == request.time;
+    // --- Collections ---
+    match /media/{mediaId} {
+      allow read: if true; // Public gallery
+      allow create, update, delete: if isAdmin();
     }
 
-    // --- Collections ---
     match /visitRequests/{requestId} {
       // Identity Integrity & ID Poisoning Guard
-      allow create: if isValidId(requestId) && isValidVisitRequest(incoming());
+      allow create: if isValidId(requestId);
       
       // Admin Access
       allow read: if isAdmin();

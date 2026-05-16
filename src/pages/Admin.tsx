@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
-import { db, auth, signInWithGoogle, logout, handleFirestoreError, OperationType } from '../lib/firebase';
+import { db, auth, signInWithGoogle, logOut, handleFirestoreError, OperationType } from '../lib/firebase';
 import { collection, query, orderBy, onSnapshot, Timestamp } from 'firebase/firestore';
 import { onAuthStateChanged, User } from 'firebase/auth';
-import { FaBell, FaSignOutAlt, FaGoogle, FaClock, FaUser, FaPhone, FaCalendarAlt, FaTag } from 'react-icons/fa';
+import { FaBell, FaSignOutAlt, FaGoogle, FaClock, FaUser, FaPhone, FaCalendarAlt, FaTag, FaImages, FaClipboardList } from 'react-icons/fa';
+import AdminGallery from '../components/AdminGallery';
 
 interface VisitRequest {
   id: string;
@@ -19,6 +20,7 @@ export default function Admin() {
   const [loading, setLoading] = useState(true);
   const [notificationsEnabled, setNotificationsEnabled] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [activeTab, setActiveTab] = useState<'requests' | 'gallery'>('requests');
 
   useEffect(() => {
     const unsubscribeAuth = onAuthStateChanged(auth, (u) => {
@@ -143,6 +145,18 @@ export default function Admin() {
             </div>
           </div>
           <div className="flex gap-4">
+            <button 
+              onClick={() => setActiveTab('requests')}
+              className={`px-6 py-3 text-[10px] font-bold uppercase tracking-widest transition-all gap-2 flex items-center shadow-lg ${activeTab === 'requests' ? 'bg-primary text-white shadow-primary/20' : 'bg-white border border-border text-stone-500 shadow-stone-200/20'}`}
+            >
+              <FaClipboardList /> Requests
+            </button>
+            <button 
+              onClick={() => setActiveTab('gallery')}
+              className={`px-6 py-3 text-[10px] font-bold uppercase tracking-widest transition-all gap-2 flex items-center shadow-lg ${activeTab === 'gallery' ? 'bg-primary text-white shadow-primary/20' : 'bg-white border border-border text-stone-500 shadow-stone-200/20'}`}
+            >
+              <FaImages /> Gallery
+            </button>
             {!notificationsEnabled && 'Notification' in window && (
               <button 
                 onClick={requestNotificationPermission}
@@ -152,7 +166,7 @@ export default function Admin() {
               </button>
             )}
             <button 
-              onClick={logout}
+              onClick={logOut}
               className="px-6 py-3 border border-border bg-white text-stone-500 text-[10px] font-bold uppercase tracking-widest hover:bg-stone-50 transition-all"
             >
               Sign Out
@@ -160,8 +174,11 @@ export default function Admin() {
           </div>
         </div>
 
-        <div className="grid gap-6">
-          {requests.length === 0 ? (
+        {activeTab === 'gallery' ? (
+          <AdminGallery />
+        ) : (
+          <div className="grid gap-6">
+            {requests.length === 0 ? (
             <div className="bg-white border border-border p-20 text-center">
               <p className="text-stone-400 font-mono text-xs uppercase tracking-widest italic">No requests recorded yet.</p>
             </div>
@@ -225,7 +242,8 @@ export default function Admin() {
             ))
           )}
         </div>
-      </div>
+      )}
     </div>
-  );
+  </div>
+);
 }

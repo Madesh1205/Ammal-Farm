@@ -32,3 +32,19 @@ export const EGGS = [
 
 export const whatsappNumber = "+916380898358";
 export const mapsLink = "https://maps.app.goo.gl/nsvn6YGBHCA3QQvf9";
+export const instagramUrl = "https://www.instagram.com/ammal_farm";
+
+export const INSTAGRAM_POST_URLS = [
+  "https://www.instagram.com/p/C69hZ0RS5bW/",
+  "https://www.instagram.com/p/C69hS0RS5bW/",
+  "https://www.instagram.com/p/C69hL0RS5bW/",
+];
+
+export const INSTAGRAM_FEED = [
+  { id: 'p1', image: '/salem-black.jpg', type: 'image' },
+  { id: 'p2', image: '/nellore-judipi.jpg', type: 'image' },
+  { id: 'p3', image: '/country-chicken.jpg', type: 'image' },
+  { id: 'p4', image: '/ducks.jpg', type: 'image' },
+  { id: 'p5', image: '/farm-herd.jpg', type: 'image' },
+  { id: 'p6', image: '/logo.jpeg', type: 'image' }
+];

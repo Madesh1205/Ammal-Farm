@@ -6,6 +6,7 @@ import Livestock from './pages/Livestock';
 import Poultry from './pages/Poultry';
 import Visit from './pages/Visit';
 import Admin from './pages/Admin';
+import GalleryPage from './pages/GalleryPage';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -26,6 +27,7 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/livestock" element={<Livestock />} />
           <Route path="/poultry" element={<Poultry />} />
+          <Route path="/gallery" element={<GalleryPage />} />
           <Route path="/visit" element={<Visit />} />
           <Route path="/admin" element={<Admin />} />
           {/* Catch all redirect to home */}

@@ -16,7 +16,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <div className="flex justify-between h-20 items-center">
             <Link to="/" className="flex items-center gap-4">
               <div className="w-12 h-12 overflow-hidden bg-primary/5 rounded-full flex items-center justify-center border border-border">
-                <img src="/logo.jpeg" alt="Ammal Farm Logo" className="w-full h-full object-cover" />
+                <img src="https://dlugisbcds8fnzdn.public.blob.vercel-storage.com/images/logo.jpeg" alt="Ammal Farm Logo" className="w-full h-full object-cover" />
               </div>
               <span className="font-serif text-2xl sm:text-3xl font-bold tracking-tight text-primary">Ammal Farm</span>
             </Link>
@@ -26,6 +26,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               <NavLink to="/" className={({ isActive }) => isActive ? "text-primary border-b-2 border-primary" : "hover:text-primary transition-colors"}>Home</NavLink>
               <NavLink to="/livestock" className={({ isActive }) => isActive ? "text-primary border-b-2 border-primary" : "hover:text-primary transition-colors"}>Livestock</NavLink>
               <NavLink to="/poultry" className={({ isActive }) => isActive ? "text-primary border-b-2 border-primary" : "hover:text-primary transition-colors"}>Poultry & Eggs</NavLink>
+              <NavLink to="/gallery" className={({ isActive }) => isActive ? "text-primary border-b-2 border-primary" : "hover:text-primary transition-colors"}>Gallery</NavLink>
               <NavLink to="/visit" className={({ isActive }) => isActive ? "text-primary border-b-2 border-primary" : "hover:text-primary transition-colors"}>Farm Visit</NavLink>
               <div className="flex items-center gap-4 ml-4 pl-4 border-l border-border">
                 <a href={`https://wa.me/${whatsappNumber.replace(/\+/g, '')}?text=${encodeURIComponent('Hi Ammal Farm, i have an inquiry regarding your products.')}`} target="_blank" rel="no-referrer" className="text-[#25D366] hover:opacity-80 transition-opacity" title="WhatsApp">
@@ -59,6 +60,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               <Link to="/" onClick={() => setIsMenuOpen(false)}>Home</Link>
               <Link to="/livestock" onClick={() => setIsMenuOpen(false)}>Livestock</Link>
               <Link to="/poultry" onClick={() => setIsMenuOpen(false)}>Poultry</Link>
+              <Link to="/gallery" onClick={() => setIsMenuOpen(false)}>Gallery</Link>
               <Link to="/visit" onClick={() => setIsMenuOpen(false)}>Farm Visit</Link>
               <div className="flex justify-center gap-8 py-4 border-t border-border mt-2">
                 <a href={`https://wa.me/${whatsappNumber.replace(/\+/g, '')}?text=${encodeURIComponent('Hi Ammal Farm, i have an inquiry regarding your products.')}`} className="text-[#25D366] flex items-center gap-2">
@@ -110,7 +112,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <div className="lg:col-span-1">
               <div className="flex items-center gap-4 mb-6">
                 <div className="w-16 h-16 overflow-hidden bg-white rounded-full flex items-center justify-center shadow-sm border border-border">
-                  <img src="/logo.jpeg" alt="Ammal Farm Logo in Tamil Nadu" className="w-full h-full object-cover" />
+                  <img src="https://dlugisbcds8fnzdn.public.blob.vercel-storage.com/images/logo.jpeg" alt="Ammal Farm Logo in Tamil Nadu" className="w-full h-full object-cover" />
                 </div>
                 <div className="font-serif text-3xl text-primary leading-none">Ammal <br />Farm</div>
               </div>
