@@ -66,7 +66,7 @@ export default function Gallery({ items, title, subtitle }: GalleryProps) {
                     muted 
                     playsInline
                     preload="metadata"
-                    className="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" 
+                    className="w-full h-full object-contain group-hover:scale-105 transition-all duration-700" 
                   />
                   <div className="absolute top-2 right-2 z-10">
                     <div className="bg-black/40 backdrop-blur-sm px-2 py-1 flex items-center gap-1.5 rounded">
@@ -81,7 +81,7 @@ export default function Gallery({ items, title, subtitle }: GalleryProps) {
                   alt={item.description}
                   loading="lazy"
                   decoding="async"
-                  className="w-full h-full object-cover group-hover:scale-110 transition-all duration-700"
+                  className="w-full h-full object-contain group-hover:scale-105 transition-all duration-700"
                 />
               )}
               

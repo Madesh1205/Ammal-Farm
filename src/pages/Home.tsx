@@ -22,7 +22,7 @@ export default function Home() {
               <span className="italic font-normal">Authenticity.</span>
             </h3>
             <p className="text-text-muted text-base mb-10 max-w-lg mx-auto leading-relaxed font-medium">
-              Since our inception, Ammal Farm has been dedicated to bridging the gap between quality livestock and demanding farmers. Our commitment to animal welfare and transparent practices makes us the preferred choice in Tamil Nadu.
+              Since our inception, Ammal Farm has been a dedicated livestock producer bridging the gap between quality breeds and demanding farmers. Our commitment to animal welfare and transparent practices makes us the preferred choice in Tamil Nadu.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link to="/visit" className="border-2 border-primary text-primary px-10 py-5 font-bold uppercase tracking-widest text-xs hover:bg-white transition-all">
@@ -73,13 +73,13 @@ export default function Home() {
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div className="order-2 lg:order-1">
               <h2 className="text-4xl font-bold tracking-tight mb-8 text-primary uppercase">
-                Best Goat Farm in Tamil Nadu – Ammal Farm
+                Premier Livestock Producer in Tamil Nadu – Ammal Farm
               </h2>
               <div className="space-y-6 text-stone-600 leading-relaxed text-sm">
                 <p>
-                  If you are searching for a <strong>goat farm near me</strong>, Ammal Farm is a trusted choice in <strong>Tamil Nadu</strong>. 
-                  Our farm is strategically located in the heart of the region, serving districts like <strong>Vellore, Chennai, and nearby villages</strong> with premium livestock. 
-                  We specialize in rearing healthy, high-yield goats including the majestic <strong>Nellore Judipi</strong> and the resilient <strong>Salem Black</strong> goats.
+                  If you are searching for a <strong>trusted livestock producer</strong>, Ammal Farm is a premier choice in <strong>Tamil Nadu</strong>. 
+                  Our farm is strategically located in the heart of the region, serving livestock buyers in <strong>Vellore, Chennai, and nearby districts</strong>. 
+                  We specialize in breeding and selling healthy, high-yield livestock including the majestic <strong>Nellore Judipi</strong> and the resilient <strong>Salem Black</strong> goats.
                 </p>
                 <div className="pt-6">
                    <Link to="/visit" className="text-accent font-bold uppercase tracking-widest text-xs border-b-2 border-accent pb-1 hover:text-primary hover:border-primary transition-all">

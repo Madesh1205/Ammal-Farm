@@ -1,14 +1,15 @@
 import { useState, useEffect } from 'react';
 import { db, storage, handleFirestoreError, OperationType } from '../lib/firebase';
-import { ref, deleteObject } from 'firebase/storage';
-import { collection, addDoc, query, orderBy, onSnapshot, deleteDoc, doc, serverTimestamp, Timestamp } from 'firebase/firestore';
-import { FaCloudUploadAlt, FaTrash, FaPlayCircle, FaImage, FaSpinner, FaImages, FaInfoCircle } from 'react-icons/fa';
+import { ref, uploadBytes, uploadBytesResumable, getDownloadURL, deleteObject } from 'firebase/storage';
+import { collection, addDoc, query, orderBy, onSnapshot, deleteDoc, doc, serverTimestamp, Timestamp, updateDoc } from 'firebase/firestore';
+import { FaCloudUploadAlt, FaTrash, FaPlayCircle, FaImage, FaSpinner, FaImages, FaInfoCircle, FaStar, FaRegStar, FaEdit, FaCheck, FaTimes } from 'react-icons/fa';
 
 interface MediaItem {
   id: string;
   url: string;
   type: 'image' | 'video';
   description: string;
+  isHighlight?: boolean;
   createdAt?: Timestamp;
 }
 
@@ -19,6 +20,8 @@ export default function AdminGallery() {
   const [url, setUrl] = useState('');
   const [description, setDescription] = useState('');
   const [mediaType, setMediaType] = useState<'image' | 'video'>('image');
+  const [editingId, setEditingId] = useState<string | null>(null);
+  const [editValue, setEditValue] = useState('');
 
   useEffect(() => {
     const q = query(collection(db, 'media'), orderBy('createdAt', 'desc'));
@@ -51,6 +54,7 @@ export default function AdminGallery() {
         url,
         type: mediaType,
         description,
+        isHighlight: false,
         createdAt: serverTimestamp(),
       });
       
@@ -61,6 +65,32 @@ export default function AdminGallery() {
     } catch (error: any) {
       handleFirestoreError(error, OperationType.WRITE, 'media');
       setUploading(false);
+    }
+  };
+
+  const handleToggleHighlight = async (item: MediaItem) => {
+    try {
+      await updateDoc(doc(db, 'media', item.id), {
+        isHighlight: !item.isHighlight
+      });
+    } catch (error) {
+      handleFirestoreError(error, OperationType.UPDATE, 'media');
+    }
+  };
+
+  const handleStartEdit = (item: MediaItem) => {
+    setEditingId(item.id);
+    setEditValue(item.description || '');
+  };
+
+  const handleSaveEdit = async (id: string) => {
+    try {
+      await updateDoc(doc(db, 'media', id), {
+        description: editValue
+      });
+      setEditingId(null);
+    } catch (error) {
+      handleFirestoreError(error, OperationType.UPDATE, 'media');
     }
   };
 
@@ -181,10 +211,17 @@ export default function AdminGallery() {
                         </span>
                       </div>
 
-                      <div className="absolute inset-0 bg-stone-900/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                      <div className="absolute inset-0 bg-stone-900/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
+                        <button 
+                          onClick={() => handleToggleHighlight(item)}
+                          className={`${item.isHighlight ? 'bg-accent' : 'bg-white/20 hover:bg-white/40'} text-white p-3 transition-colors shadow-xl rounded-full`}
+                          title={item.isHighlight ? "Remove from Highlights" : "Add to Highlights"}
+                        >
+                          {item.isHighlight ? <FaStar size={18} /> : <FaRegStar size={18} />}
+                        </button>
                         <button 
                           onClick={() => handleDelete(item)}
-                          className="bg-red-600 text-white p-3 hover:bg-red-700 transition-colors shadow-xl"
+                          className="bg-red-600 text-white p-3 hover:bg-red-700 transition-colors shadow-xl rounded-full"
                           title="Delete Permanently"
                         >
                           <FaTrash size={16} />
@@ -192,9 +229,48 @@ export default function AdminGallery() {
                       </div>
                     </div>
                     <div className="p-3">
-                      <p className="text-[9px] font-medium text-stone-500 italic line-clamp-1">
-                        {item.description || 'No description'}
-                      </p>
+                      <div className="mb-1">
+                        {editingId === item.id ? (
+                          <div className="flex gap-1 items-center">
+                            <input 
+                              type="text"
+                              value={editValue}
+                              onChange={(e) => setEditValue(e.target.value)}
+                              className="text-[9px] border border-stone-200 px-2 py-1 w-full bg-stone-50 font-medium focus:outline-none focus:border-accent"
+                              autoFocus
+                              onKeyDown={(e) => e.key === 'Enter' && handleSaveEdit(item.id)}
+                            />
+                            <button onClick={() => handleSaveEdit(item.id)} className="text-[#2ecc71] hover:scale-110 p-1.5 transition-transform" title="Save">
+                              <FaCheck size={12} />
+                            </button>
+                            <button onClick={() => setEditingId(null)} className="text-red-400 hover:scale-110 p-1.5 transition-transform" title="Cancel">
+                              <FaTimes size={12} />
+                            </button>
+                          </div>
+                        ) : (
+                          <div 
+                            className="flex justify-between items-center group/desc cursor-pointer hover:bg-stone-50 p-1 -m-1 rounded transition-colors"
+                            onClick={() => handleStartEdit(item)}
+                          >
+                            <p className="text-[9px] font-medium text-stone-500 italic line-clamp-1 flex-grow">
+                              {item.description || 'No description (Click to add)'}
+                            </p>
+                            <div className="flex items-center gap-2">
+                              <button 
+                                className="opacity-40 group-hover/desc:opacity-100 text-stone-400 hover:text-primary transition-all p-1"
+                                title="Edit Description"
+                              >
+                                <FaEdit size={12} />
+                              </button>
+                              {item.isHighlight && (
+                                <span className="text-accent flex-shrink-0" title="Highlighted">
+                                  <FaStar size={10} />
+                                </span>
+                              )}
+                            </div>
+                          </div>
+                        )}
+                      </div>
                       <div className="mt-2 pt-2 border-t border-stone-100 flex justify-between items-center">
                         <span className="text-[8px] font-bold uppercase tracking-widest text-[#2ecc71]">Displayed on Site</span>
                         <span className="text-[8px] text-stone-400 font-mono">

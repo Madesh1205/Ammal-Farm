@@ -109,7 +109,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
       <footer className="bg-stone-50 pt-24 pb-12 border-t border-border">
         <div className="max-w-7xl mx-auto px-4 text-center mb-12 sm:text-left">
-          <p className="text-[10px] uppercase font-bold tracking-[0.4em] text-accent mb-4">Ammal Farm: Tamil Nadu's Premier Goat & Poultry Hub</p>
+          <p className="text-[10px] uppercase font-bold tracking-[0.4em] text-accent mb-4">Ammal Farm: Tamil Nadu's Premier Livestock & Poultry Producer</p>
         </div>
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 pb-16 border-b border-border mb-12">
@@ -207,7 +207,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <div className="flex flex-col md:flex-row justify-between items-center text-[10px] uppercase font-bold tracking-[0.3em] text-stone-400 gap-6">
             <div className="flex gap-8">
               <p>© 2026 Ammal Farm</p>
-              <p className="hidden sm:block">Quality Livestock Rearing</p>
+              <p className="hidden sm:block">Quality Livestock Producer & Seller</p>
             </div>
             <div className="flex gap-8">
               <a href="#" className="hover:text-primary transition-colors">Privacy Policy</a>

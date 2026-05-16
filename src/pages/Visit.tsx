@@ -162,7 +162,7 @@ export default function Visit() {
         <div className="lg:pl-12">
           <h2 className="text-4xl font-bold mb-8 uppercase tracking-tight">Visit Ammal Farm</h2>
           <p className="text-text-muted mb-12 text-sm leading-relaxed max-w-xl">
-            Experience the best <span className="font-bold text-accent">goat farm in Tamil Nadu</span> firsthand. We welcome serious buyers, fellow farmers, and families looking for a <span className="font-bold text-accent">goat farm near me</span> for weekend visits. Our facility in Vellore district follows natural rearing practices that define our quality.
+            Experience a leading <span className="font-bold text-accent">livestock producer in Tamil Nadu</span> firsthand. We welcome serious buyers and fellow breeders looking for a <span className="font-bold text-accent">livestock seller near me</span>. Our facility in Vellore district follows natural rearing practices that define our quality.
           </p>
           <div className="space-y-6">
             <a href={mapsLink} target="_blank" rel="no-referrer" className="flex gap-4 items-center group cursor-pointer p-2 -ml-2 rounded-xl hover:bg-stone-50 transition-all duration-300">

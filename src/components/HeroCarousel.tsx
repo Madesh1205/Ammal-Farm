@@ -8,7 +8,7 @@ const SLIDES = [
     image: 'https://dlugisbcds8fnzdn.public.blob.vercel-storage.com/images/nellore-judipi.jpg',
     title: 'Precision Rearing',
     subtitle: 'The Gold Standard of Tamil Nadu',
-    description: 'Specializing in Nellore Judipi and Salem Black goats with scientific nutrition and natural habitat.',
+    description: 'Premier livestock producer specializing in elite Nellore Judipi and Salem Black goats with scientific rearing practices.',
     cta: 'View Catalog',
     link: '/livestock'
   },
@@ -16,7 +16,7 @@ const SLIDES = [
     image: 'https://dlugisbcds8fnzdn.public.blob.vercel-storage.com/images/salem%20black1.jpg',
     title: 'Majestic Pedigree',
     subtitle: 'Salem Black Excellence',
-    description: 'Sourcing the finest breeding lines to ensure superior growth rates and resilient livestock.',
+    description: 'Leading livestock seller sourcing the finest breeding lines to ensure superior growth rates and resilient breeds.',
     cta: 'Book a Visit',
     link: '/visit'
   },
@@ -24,7 +24,7 @@ const SLIDES = [
     image: 'https://dlugisbcds8fnzdn.public.blob.vercel-storage.com/images/country-chicken.jpg',
     title: 'Sustainable Poultry',
     subtitle: 'Natural Nattu Kozhi',
-    description: 'Free-range country chickens and ducks raised without growth hormones in stress-free environments.',
+    description: 'Livestock producer of free-range country chickens and ducks raised naturally in stress-free environments.',
     cta: 'Explore Poultry',
     link: '/poultry'
   }
@@ -61,7 +61,7 @@ export default function HeroCarousel() {
           <div className="absolute inset-0">
             <img 
               src={SLIDES[current].image} 
-              alt={SLIDES[current].title} 
+              alt={`${SLIDES[current].title} - ${SLIDES[current].subtitle} at Ammal Farm`} 
               decoding="async"
               className="w-full h-full object-cover opacity-60 scale-105"
             />

@@ -58,4 +58,4 @@
 ## 5. Deployment & Technical
 - **Tech Stack**: React 19, Tailwind CSS 4, Framer Motion.
 - **Security**: Basic form validation, no sensitive data stored client-side.
-- **SEO**: Meta tags for "Goat farm near me", "Nellore goat sale India".
+- **SEO**: Meta tags for "Goat farm near me", "Nellore goat sale India". Sitemap and robots.txt configured for Google Search Console.
