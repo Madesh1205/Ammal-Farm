@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { FaMapMarkerAlt, FaInstagram, FaWhatsapp, FaPhone, FaCheckCircle } from 'react-icons/fa';
 import { mapsLink, whatsappNumber } from '../data';
 import { db, handleFirestoreError, OperationType } from '../lib/firebase';
