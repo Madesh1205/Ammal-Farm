@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import Gallery from '../components/Gallery';
-import { db } from '../lib/firebase';
+import { db, handleFirestoreError, OperationType } from '../lib/firebase';
 import { collection, query, orderBy, onSnapshot, Timestamp } from 'firebase/firestore';
 
 interface MediaItem {
@@ -13,14 +13,14 @@ interface MediaItem {
 }
 
 const STATIC_GALLERY: MediaItem[] = [
-  { id: 's1', url: 'https://dlugisbcds8fnzdn.public.blob.vercel-storage.com/images/nellore-judipi.jpg', type: 'image', description: 'Our healthy farm herd' },
-  { id: 's2', url: 'https://dlugisbcds8fnzdn.public.blob.vercel-storage.com/images/nellore-judipi.jpg', type: 'image', description: 'Nellore Judipi Buck' },
-  { id: 's3', url: 'https://dlugisbcds8fnzdn.public.blob.vercel-storage.com/images/salem%20black1.jpg', type: 'image', description: 'Salem Black livestock' },
-  { id: 's4', url: 'https://dlugisbcds8fnzdn.public.blob.vercel-storage.com/images/country-chicken.jpg', type: 'image', description: 'Free-range country chicken' },
-  { id: 's5', url: 'https://dlugisbcds8fnzdn.public.blob.vercel-storage.com/images/ducks.jpg', type: 'image', description: 'Farm ducks in habitat' },
-  { id: 's6', url: 'https://dlugisbcds8fnzdn.public.blob.vercel-storage.com/images/black-chicken.jpg', type: 'image', description: 'Kadaknath poultry' },
-  { id: 's7', url: 'https://dlugisbcds8fnzdn.public.blob.vercel-storage.com/images/turkey.jpg', type: 'image', description: 'Seasonal Turkeys' },
-  { id: 's8', url: 'https://dlugisbcds8fnzdn.public.blob.vercel-storage.com/images/logo.jpeg', type: 'image', description: 'Ammal Farm Pride' },
+  { id: 's1', url: 'https://dlugisbcds8fnzdn.public.blob.vercel-storage.com/images/nellore-judipi.jpg', type: 'image', description: 'Ammal Farm Livestock - Healthy farm herd in Tamil Nadu' },
+  { id: 's2', url: 'https://dlugisbcds8fnzdn.public.blob.vercel-storage.com/images/nellore-judipi.jpg', type: 'image', description: 'Nellore Judipi Buck - Premium Bakrid Goat at Ammal Farm' },
+  { id: 's3', url: 'https://dlugisbcds8fnzdn.public.blob.vercel-storage.com/images/salem%20black1.jpg', type: 'image', description: 'Salem Black Goat - Hardy indigenous livestock Tamil Nadu' },
+  { id: 's4', url: 'https://dlugisbcds8fnzdn.public.blob.vercel-storage.com/images/country-chicken.jpg', type: 'image', description: 'Free-range country chicken (Nattu Kozhi) organic farm' },
+  { id: 's5', url: 'https://dlugisbcds8fnzdn.public.blob.vercel-storage.com/images/ducks.jpg', type: 'image', description: 'Farm ducks in natural habitat at Ammal Farm' },
+  { id: 's6', url: 'https://dlugisbcds8fnzdn.public.blob.vercel-storage.com/images/black-chicken.jpg', type: 'image', description: 'Kadaknath poultry - Medicinal black chicken Tamil Nadu' },
+  { id: 's7', url: 'https://dlugisbcds8fnzdn.public.blob.vercel-storage.com/images/turkey.jpg', type: 'image', description: 'Turkey (Van Kozhi) seasonal livestock Ammal Farm' },
+  { id: 's8', url: 'https://dlugisbcds8fnzdn.public.blob.vercel-storage.com/images/logo.jpeg', type: 'image', description: 'Ammal Farm - Premium Livestock Producer & Seller' },
 ];
 
 export default function GalleryPage() {

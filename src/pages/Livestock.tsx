@@ -9,7 +9,7 @@ export default function Livestock() {
           <div className="lg:sticky lg:top-32 h-fit">
             <h2 className="text-4xl font-bold mb-6">Specialty <br/>Selection</h2>
             <p className="text-text-muted mb-8 text-sm leading-relaxed">
-              Inquiry-based pricing ensures you get the best current market value for elite, healthy livestock.
+              As a premier livestock producer, we ensure you get the best market value for elite, healthy breeds through inquiry-based pricing.
             </p>
             <div className="p-6 bg-primary text-white border-l-4 border-accent">
               <p className="text-[10px] uppercase tracking-widest font-bold mb-4 opacity-70">Our Strategy</p>
@@ -28,7 +28,7 @@ export default function Livestock() {
               >
                 <span className="text-[10px] uppercase font-bold text-accent tracking-widest mb-4">Featured Selection</span>
                 <div className="aspect-square overflow-hidden mb-6 bg-stone-50">
-                  <img src={goat.image} alt={goat.name} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+                  <img src={goat.image} alt={`${goat.name} (${goat.aka}) - Premium Livestock from Ammal Farm`} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
                 </div>
                 <h3 className="text-2xl font-bold mb-2">{goat.name}</h3>
                 <p className="text-[13px] text-text-muted leading-relaxed mb-8 flex-grow">
