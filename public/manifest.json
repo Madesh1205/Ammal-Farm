@@ -1,0 +1,17 @@
+{
+  "short_name": "Ammal Farm",
+  "name": "Ammal Farm Companion",
+  "icons": [
+    {
+      "src": "/logo.jpeg",
+      "type": "image/jpeg",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "/admin",
+  "background_color": "#1c1917",
+  "theme_color": "#a4c639",
+  "display": "standalone",
+  "orientation": "portrait"
+}

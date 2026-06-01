@@ -10,6 +10,8 @@ interface MediaItem {
   type: 'image' | 'video';
   description: string;
   isHighlight?: boolean;
+  highlightedAt?: Timestamp;
+  highlightOrder?: number | null;
   createdAt?: Timestamp;
 }
 
@@ -38,10 +40,20 @@ export default function GalleryCarousel() {
     const unsubscribe = onSnapshot(q, (snapshot) => {
       let data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })) as MediaItem[];
       
-      // Sort by createdAt desc in memory
+      // Sort in memory:
+      // 1. By highlightOrder ascending (numbered slots come first: 1, 2, 3...)
+      // 2. Then by highlightedAt desc (last starred first)
+      // 3. Fallback to createdAt desc
       data.sort((a, b) => {
-        const timeA = a.createdAt?.toMillis() || 0;
-        const timeB = b.createdAt?.toMillis() || 0;
+        const orderA = a.highlightOrder !== undefined && a.highlightOrder !== null ? a.highlightOrder : Infinity;
+        const orderB = b.highlightOrder !== undefined && b.highlightOrder !== null ? b.highlightOrder : Infinity;
+        
+        if (orderA !== orderB) {
+          return orderA - orderB;
+        }
+
+        const timeA = a.highlightedAt?.toMillis() || a.createdAt?.toMillis() || 0;
+        const timeB = b.highlightedAt?.toMillis() || b.createdAt?.toMillis() || 0;
         return timeB - timeA;
       });
 
@@ -146,7 +158,18 @@ export default function GalleryCarousel() {
                 x: { type: "spring", stiffness: 300, damping: 30 },
                 opacity: { duration: 0.2 }
               }}
-              className="absolute inset-0 flex items-center justify-center"
+              drag="x"
+              dragConstraints={{ left: 0, right: 0 }}
+              dragElastic={0.6}
+              onDragEnd={(_event, info) => {
+                if (timerRef.current) clearInterval(timerRef.current);
+                if (info.offset.x < -50) {
+                  slideNext();
+                } else if (info.offset.x > 50) {
+                  slidePrev();
+                }
+              }}
+              className="absolute inset-0 flex items-center justify-center cursor-grab active:cursor-grabbing touch-pan-y"
             >
               <div className="relative w-full h-full max-w-4xl mx-auto bg-white border border-border p-4 shadow-2xl group">
                 <div className="w-full h-full overflow-hidden relative">

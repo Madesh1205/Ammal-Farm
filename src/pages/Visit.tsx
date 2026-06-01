@@ -130,7 +130,7 @@ export default function Visit() {
                   />
                 </div>
                 <div className="space-y-1">
-                  <label className="text-[10px] uppercase font-bold tracking-widest text-text-muted">Inquiry Type</label>
+                  <label className="text-[10px] uppercase font-bold tracking-widest text-text-muted">Inquire Type</label>
                   <select 
                     required 
                     className="w-full p-4 border border-border focus:border-primary outline-none transition-all text-sm appearance-none bg-stone-50"
@@ -139,7 +139,7 @@ export default function Visit() {
                   >
                     <option value="">Select an option</option>
                     <option>Interested in buying Goats</option>
-                    <option>Poultry Inquiry</option>
+                    <option>Poultry Inquire</option>
                     <option>Farm Visit Request</option>
                   </select>
                 </div>

@@ -216,7 +216,7 @@ export default function Admin() {
                     </div>
                   </div>
                   <div className="p-6">
-                    <p className="text-[10px] font-mono text-stone-400 uppercase mb-2">Inquiry Type</p>
+                    <p className="text-[10px] font-mono text-stone-400 uppercase mb-2">Inquire Type</p>
                     <div className="flex items-center gap-3">
                       <div className="w-8 h-8 rounded-full bg-stone-100 flex items-center justify-center text-stone-500">
                         <FaTag size={12} />

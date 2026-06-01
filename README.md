@@ -16,7 +16,7 @@
 
 ## 🐾 About
 
-**Ammal Farm** is a premium livestock and poultry farm located in Vellore, Tamil Nadu. This web application serves as the farm's digital storefront, allowing customers to browse elite breeds, view a curated gallery of farm life, and connect directly with the farm owners for inquiries.
+**Ammal Farm** is a premium livestock and poultry farm located in Vellore, Tamil Nadu. This web application serves as the farm's digital storefront, allowing customers to browse elite breeds, view a curated gallery of farm life, and connect directly with the farm owners for inquires.
 
 ### Key Features
 - **Dynamic Gallery**: Real-time gallery powered by Firebase, allowing admins to highlight specific photos and videos.

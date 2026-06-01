@@ -2,13 +2,13 @@
   "entities": {
     "visitRequest": {
       "title": "Visit Request",
-      "description": "A request for a farm visit or livestock inquiry.",
+      "description": "A request for a farm visit or livestock inquire.",
       "type": "object",
       "properties": {
         "name": { "type": "string", "description": "Full name of the requester" },
         "phone": { "type": "string", "description": "10-digit Indian phone number" },
         "date": { "type": "string", "description": "Preferred date of visit" },
-        "type": { "type": "string", "description": "Type of inquiry" },
+        "type": { "type": "string", "description": "Type of inquire" },
         "createdAt": { "type": "string", "format": "date-time", "description": "Timestamp of request creation" }
       },
       "required": ["name", "phone", "date", "type", "createdAt"]
