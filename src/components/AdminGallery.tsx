@@ -487,7 +487,7 @@ export default function AdminGallery() {
                           </div>
                         </div>
                       ) : (
-                        <img src={item.url} alt="" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" />
+                        <img src={item.url} alt="" className="w-full h-full object-cover transition-all duration-500" />
                       )}
                       
                       <div className="absolute top-2 left-2 flex gap-1">
@@ -634,7 +634,7 @@ export default function AdminGallery() {
                   : "Note: These images are currently VISIBLE as the fallback gallery."}
               </p>
               
-              <div className="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-4 opacity-60 grayscale">
+              <div className="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-4 opacity-60">
                 {STATIC_DEFAULTS.map((item) => (
                   <div key={item.id} className="relative group aspect-square bg-stone-100 border border-border overflow-hidden">
                     <img src={item.url} alt="" className="w-full h-full object-cover" />

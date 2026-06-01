@@ -47,9 +47,9 @@ export const GOATS: Goat[] = [
     feedType: 'Natural Free-Grazing Range & Certified Pulse Bran',
     vaccination: 'Fully Dewormed, PPR & ET vaccinated',
     status: 'available',
-    image: '/premium-salem-black-goat-breeding-male-ammal-farm.jpg',
+    image: 'https://dlugisbcds8fnzdn.public.blob.vercel-storage.com/images/Livestock/salem-black.jpg',
     images: [
-      '/premium-salem-black-goat-breeding-male-ammal-farm.jpg',
+      'https://dlugisbcds8fnzdn.public.blob.vercel-storage.com/images/Livestock/salem-black.jpg',
       '/healthy-breeding-buck-salem-black-goat-ammal-farm.jpg'
     ],
     tags: ['Indigenous', 'Hardy', 'Tamil Nadu'],

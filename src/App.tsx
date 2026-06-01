@@ -8,6 +8,8 @@ import Poultry from './pages/Poultry';
 import Visit from './pages/Visit';
 import Admin from './pages/Admin';
 import GalleryPage from './pages/GalleryPage';
+import Privacy from './pages/Privacy';
+import Terms from './pages/Terms';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -31,6 +33,8 @@ export default function App() {
           <Route path="/gallery" element={<GalleryPage />} />
           <Route path="/visit" element={<Visit />} />
           <Route path="/admin" element={<Admin />} />
+          <Route path="/privacy" element={<Privacy />} />
+          <Route path="/terms" element={<Terms />} />
           {/* Catch all redirect to home */}
           <Route path="*" element={<Home />} />
         </Routes>

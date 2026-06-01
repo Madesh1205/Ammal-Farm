@@ -219,7 +219,7 @@ export function getFAQSchema() {
         "name": "How is goat pricing determined?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Pricing is based on inquiry, considering genetic purity, weight, age, and individual breed characteristics. Contact us directly on WhatsApp support for tailored quotes."
+          "text": "Pricing is based on direct inquire, considering genetic purity, weight, age, and individual breed characteristics. Contact us directly on WhatsApp support for tailored quotes."
         }
       }
     ]
