@@ -15,6 +15,72 @@ interface MediaItem {
   createdAt?: Timestamp;
 }
 
+const compressImage = (file: File, maxWidth = 1920, maxHeight = 1080, quality = 0.82): Promise<Blob> => {
+  return new Promise((resolve) => {
+    if (!file.type.startsWith('image/')) {
+      resolve(file);
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const img = new Image();
+      img.onload = () => {
+        let width = img.width;
+        let height = img.height;
+
+        if (width > height) {
+          if (width > maxWidth) {
+            height = Math.round((height * maxWidth) / width);
+            width = maxWidth;
+          }
+        } else {
+          if (height > maxHeight) {
+            width = Math.round((width * maxHeight) / height);
+            height = maxHeight;
+          }
+        }
+
+        const canvas = document.createElement('canvas');
+        canvas.width = width;
+        canvas.height = height;
+
+        const ctx = canvas.getContext('2d');
+        if (!ctx) {
+          resolve(file);
+          return;
+        }
+
+        ctx.drawImage(img, 0, 0, width, height);
+
+        canvas.toBlob(
+          (blob) => {
+            if (blob) {
+              resolve(blob);
+            } else {
+              resolve(file);
+            }
+          },
+          'image/jpeg',
+          quality
+        );
+      };
+      
+      img.onerror = () => {
+        resolve(file);
+      };
+      
+      img.src = event.target?.result as string;
+    };
+    
+    reader.onerror = () => {
+      resolve(file);
+    };
+    
+    reader.readAsDataURL(file);
+  });
+};
+
 export default function AdminGallery() {
   const [items, setItems] = useState<MediaItem[]>([]);
   const [loading, setLoading] = useState(true);
@@ -125,6 +191,21 @@ export default function AdminGallery() {
     const typeValue = isVideo ? 'video' : 'image';
     
     try {
+      let dataToUpload: Blob = file;
+      let targetName = file.name;
+
+      if (!isVideo) {
+        setUploadProgress(5); // Show brief compression phase
+        try {
+          dataToUpload = await compressImage(file);
+          // Rename extension to .jpg since canvas export format is jpeg
+          const baseName = file.name.substring(0, file.name.lastIndexOf('.')) || file.name;
+          targetName = `${baseName}.jpg`;
+        } catch (compressionErr) {
+          console.warn("Client-side compression skipped or failed:", compressionErr);
+        }
+      }
+
       const xhr = new XMLHttpRequest();
       
       xhr.upload.addEventListener('progress', (event) => {
@@ -143,7 +224,7 @@ export default function AdminGallery() {
             await addDoc(collection(db, 'media'), {
               url: downloadUrl,
               type: typeValue,
-              description: description || `Uploaded ${file.name}`,
+              description: description || `Uploaded ${targetName}`,
               isHighlight: false,
               createdAt: serverTimestamp(),
             });
@@ -177,9 +258,9 @@ export default function AdminGallery() {
         setUploadProgress(null);
       });
       
-      xhr.open('POST', `/api/upload?filename=${encodeURIComponent(file.name)}`);
-      xhr.setRequestHeader('Content-Type', file.type || 'application/octet-stream');
-      xhr.send(file);
+      xhr.open('POST', `/api/upload?filename=${encodeURIComponent(targetName)}`);
+      xhr.setRequestHeader('Content-Type', isVideo ? (file.type || 'application/octet-stream') : 'image/jpeg');
+      xhr.send(dataToUpload);
     } catch (e: any) {
       console.error(e);
       setUploadError(e.message || "An unexpected error occurred during setup.");
@@ -382,7 +463,7 @@ export default function AdminGallery() {
                     <div className="flex justify-between text-[10px] font-bold uppercase tracking-widest text-[#2ecc71]">
                       <span className="flex items-center gap-1.5 shrink-0">
                         <span className="animate-spin inline-block"><FaSpinner /></span>
-                        Uploading to Firebase Storage...
+                        {uploadProgress <= 5 ? "Compressing target image..." : "Uploading to Vercel Blob..."}
                       </span>
                       <span>{uploadProgress}%</span>
                     </div>
