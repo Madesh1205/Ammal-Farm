@@ -314,11 +314,17 @@ const PORT = 3000;
             const seoHtml = getSeoInjectedHtml(rawHtml, req.path);
             res.send(seoHtml);
           } else {
-            res.sendFile(path.join(distPath, "index.html"));
+            console.error(`index.html not found at: ${indexPath}`);
+            res.status(500).send("Application index.html shell not found in Serverless environment.");
           }
         } catch (err) {
           console.error("SEO pre-rendering error, rendering default template:", err);
-          res.sendFile(path.join(distPath, "index.html"));
+          const indexPath = path.join(distPath, "index.html");
+          if (fs.existsSync(indexPath)) {
+            res.sendFile(indexPath);
+          } else {
+            res.status(500).send("Application index.html shell error: " + (err as Error).message);
+          }
         }
       });
     }
