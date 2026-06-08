@@ -402,11 +402,17 @@ const PORT = 3000;
             const seoHtml = getSeoInjectedHtml(rawHtml, req.path);
             res.send(seoHtml);
           } else {
-            res.sendFile(path.join(distPath, "index.html"));
+            console.warn(`Production dist/index.html not found under process.cwd(): ${indexPath}`);
+            res.status(404).send("Application shell not found. Please build or deploy the application again.");
           }
         } catch (err) {
-          console.error("SEO pre-rendering error, rendering default template:", err);
-          res.sendFile(path.join(distPath, "index.html"));
+          console.error("SEO pre-rendering error:", err);
+          const indexPath = path.join(distPath, "index.html");
+          if (fs.existsSync(indexPath)) {
+            res.sendFile(indexPath);
+          } else {
+            res.status(500).send("An error occurred during SEO pre-rendering and no fallback template was found.");
+          }
         }
       });
     }
