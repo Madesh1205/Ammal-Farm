@@ -1,4 +1,11 @@
 {
+  "version": 2,
+  "functions": {
+    "api/index.ts": {
+      "runtime": "nodejs18.x",
+      "maxDuration": 30
+    }
+  },
   "headers": [
     {
       "source": "/sitemap.xml",
@@ -21,8 +28,24 @@
   ],
   "rewrites": [
     {
+      "source": "/api/(.*)",
+      "destination": "/api/index.ts"
+    },
+    {
+      "source": "/sitemap.xml",
+      "destination": "/api/index.ts"
+    },
+    {
+      "source": "/image-sitemap.xml",
+      "destination": "/api/index.ts"
+    },
+    {
+      "source": "/robots.txt",
+      "destination": "/api/index.ts"
+    },
+    {
       "source": "/((?!.*\\..*).*)",
-      "destination": "/index.html"
+      "destination": "/api/index.ts"
     }
   ]
 }

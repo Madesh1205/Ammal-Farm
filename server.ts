@@ -1,7 +1,6 @@
 import express from "express";
 import path from "path";
 import fs from "fs";
-import { createServer as createViteServer } from "vite";
 import { put, del } from "@vercel/blob";
 import dotenv from "dotenv";
 
@@ -29,9 +28,8 @@ const IMAGES = [
   { url: "https://dlugisbcds8fnzdn.public.blob.vercel-storage.com/images/Poultry/aseel_cross.jpg", title: "Heavyweight Aseel Rooster", caption: "High resilience native Aseel cross rooster selected for local breeding and muscle definition." }
 ];
 
-async function startServer() {
-  const app = express();
-  const PORT = 3000;
+const app = express();
+const PORT = 3000;
 
   // 1. Security Headers Middleware
   app.use((req, res, next) => {
@@ -212,7 +210,20 @@ async function startServer() {
         return res.status(401).json({ error: "BLOB_READ_WRITE_TOKEN environment variable is not set." });
       }
 
-      const blobResult = await put(filename, req.body, {
+      // Safeguard req.body if it's already pre-parsed to a Buffer or string
+      let fileBuffer = req.body;
+      if (typeof req.body === "string") {
+        fileBuffer = Buffer.from(req.body);
+      } else if (req.body && typeof req.body === "object" && !Buffer.isBuffer(req.body)) {
+        // If some other body parser parsed it, or if it's empty
+        if (Object.keys(req.body).length === 0) {
+          fileBuffer = Buffer.alloc(0);
+        } else {
+          fileBuffer = Buffer.from(JSON.stringify(req.body));
+        }
+      }
+
+      const blobResult = await put(filename, fileBuffer, {
         contentType,
         access: "public",
         token,
@@ -281,38 +292,48 @@ async function startServer() {
   };
 
   // Vite integration
-  if (process.env.NODE_ENV !== "production") {
-    const vite = await createViteServer({
-      server: { middlewareMode: true },
-      appType: "spa",
-    });
-    app.use(vite.middlewares);
-  } else {
-    const distPath = path.join(process.cwd(), "dist");
-    
-    // Serve static files (ignore index.html itself to intercept its routing dynamically)
-    app.use(express.static(distPath, { index: false }));
+  async function initializeBundler() {
+    if (process.env.NODE_ENV !== "production") {
+      const { createServer: createViteServer } = await import("vite");
+      const vite = await createViteServer({
+        server: { middlewareMode: true },
+        appType: "spa",
+      });
+      app.use(vite.middlewares);
+    } else {
+      const distPath = path.join(process.cwd(), "dist");
+      
+      // Serve static files (ignore index.html itself to intercept its routing dynamically)
+      app.use(express.static(distPath, { index: false }));
 
-    app.get("*", (req, res) => {
-      try {
-        const indexPath = path.join(distPath, "index.html");
-        if (fs.existsSync(indexPath)) {
-          const rawHtml = fs.readFileSync(indexPath, "utf8");
-          const seoHtml = getSeoInjectedHtml(rawHtml, req.path);
-          res.send(seoHtml);
-        } else {
+      app.get("*", (req, res) => {
+        try {
+          const indexPath = path.join(distPath, "index.html");
+          if (fs.existsSync(indexPath)) {
+            const rawHtml = fs.readFileSync(indexPath, "utf8");
+            const seoHtml = getSeoInjectedHtml(rawHtml, req.path);
+            res.send(seoHtml);
+          } else {
+            res.sendFile(path.join(distPath, "index.html"));
+          }
+        } catch (err) {
+          console.error("SEO pre-rendering error, rendering default template:", err);
           res.sendFile(path.join(distPath, "index.html"));
         }
-      } catch (err) {
-        console.error("SEO pre-rendering error, rendering default template:", err);
-        res.sendFile(path.join(distPath, "index.html"));
-      }
+      });
+    }
+  }
+
+  initializeBundler().catch((err) => {
+    console.error("Bundler initialization error:", err);
+  });
+
+  if (process.env.VERCEL) {
+    console.log("Running in Vercel Serverless environment, app exported.");
+  } else {
+    app.listen(PORT, "0.0.0.0", () => {
+      console.log(`Server running in ${process.env.NODE_ENV || "development"} mode on http://localhost:${PORT}`);
     });
   }
 
-  app.listen(PORT, "0.0.0.0", () => {
-    console.log(`Server running in ${process.env.NODE_ENV || "development"} mode on http://localhost:${PORT}`);
-  });
-}
-
-startServer();
+export default app;
