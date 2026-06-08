@@ -1,6 +1,7 @@
 import express from "express";
 import path from "path";
 import fs from "fs";
+import { createServer as createViteServer } from "vite";
 import { put, del } from "@vercel/blob";
 import dotenv from "dotenv";
 
@@ -236,6 +237,94 @@ const PORT = 3000;
     }
   });
 
+  // Local folder proxy upload route
+  app.post("/api/upload-local", express.raw({ type: "*/*", limit: "50mb" }), async (req, res) => {
+    try {
+      const filename = (req.query.filename as string) || `file_${Date.now()}`;
+      const contentType = (req.headers["content-type"] as string) || "application/octet-stream";
+      
+      const uploadsDirName = "uploads";
+      const publicUploadsDir = path.join(process.cwd(), "public", uploadsDirName);
+      
+      if (!fs.existsSync(publicUploadsDir)) {
+        fs.mkdirSync(publicUploadsDir, { recursive: true });
+      }
+
+      // Safeguard req.body if it's already pre-parsed to a Buffer or string
+      let fileBuffer = req.body;
+      if (typeof req.body === "string") {
+        fileBuffer = Buffer.from(req.body);
+      } else if (req.body && typeof req.body === "object" && !Buffer.isBuffer(req.body)) {
+        if (Object.keys(req.body).length === 0) {
+          fileBuffer = Buffer.alloc(0);
+        } else {
+          fileBuffer = Buffer.from(JSON.stringify(req.body));
+        }
+      }
+
+      // Generate a unique file name to avoid collisions
+      const ext = path.extname(filename);
+      const base = path.basename(filename, ext);
+      const uniqueFilename = `${base}_${Date.now()}${ext}`;
+      const destPathPublic = path.join(publicUploadsDir, uniqueFilename);
+
+      // Save to public/uploads
+      fs.writeFileSync(destPathPublic, fileBuffer);
+      console.log(`Uploaded file saved locally to public: ${destPathPublic}`);
+
+      // Also copy to dist/uploads if dist exists
+      const distPath = path.join(process.cwd(), "dist");
+      if (fs.existsSync(distPath)) {
+        const distUploadsDir = path.join(distPath, uploadsDirName);
+        if (!fs.existsSync(distUploadsDir)) {
+          fs.mkdirSync(distUploadsDir, { recursive: true });
+        }
+        const destPathDist = path.join(distUploadsDir, uniqueFilename);
+        fs.writeFileSync(destPathDist, fileBuffer);
+        console.log(`Uploaded file copied locally to dist: ${destPathDist}`);
+      }
+
+      // Return local relative URL
+      const relativeUrl = `/${uploadsDirName}/${uniqueFilename}`;
+      res.json({ url: relativeUrl, success: true });
+    } catch (error: any) {
+      console.error("Local folder upload error:", error);
+      res.status(500).json({ error: error.message || "Local upload failed on proxy server." });
+    }
+  });
+
+  // Local folder proxy delete route
+  app.delete("/api/delete-local", async (req, res) => {
+    try {
+      const fileUrl = req.query.url as string;
+      if (!fileUrl) {
+        return res.status(400).json({ error: "URL query parameter is required." });
+      }
+
+      if (fileUrl.startsWith("/uploads/")) {
+        const decodedUrl = decodeURIComponent(fileUrl);
+        const filename = path.basename(decodedUrl);
+        
+        const publicPath = path.join(process.cwd(), "public", "uploads", filename);
+        if (fs.existsSync(publicPath)) {
+          fs.unlinkSync(publicPath);
+          console.log(`Deleted local file from public: ${publicPath}`);
+        }
+
+        const distPath = path.join(process.cwd(), "dist", "uploads", filename);
+        if (fs.existsSync(distPath)) {
+          fs.unlinkSync(distPath);
+          console.log(`Deleted local file from dist: ${distPath}`);
+        }
+      }
+
+      res.json({ success: true });
+    } catch (error: any) {
+      console.error("Local folder file delete error:", error);
+      res.status(500).json({ error: error.message || "Local delete failed on proxy server." });
+    }
+  });
+
   // Dynamic SEO Injection helper for serving index.html
   const getSeoInjectedHtml = (originalHtml: string, urlPath: string): string => {
     let title = "Ammal Farm | Premium Nellore Jodipi and Salem Black Goats in Tamil Nadu";
@@ -294,7 +383,6 @@ const PORT = 3000;
   // Vite integration
   async function initializeBundler() {
     if (process.env.NODE_ENV !== "production") {
-      const { createServer: createViteServer } = await import("vite");
       const vite = await createViteServer({
         server: { middlewareMode: true },
         appType: "spa",
@@ -314,17 +402,11 @@ const PORT = 3000;
             const seoHtml = getSeoInjectedHtml(rawHtml, req.path);
             res.send(seoHtml);
           } else {
-            console.error(`index.html not found at: ${indexPath}`);
-            res.status(500).send("Application index.html shell not found in Serverless environment.");
+            res.sendFile(path.join(distPath, "index.html"));
           }
         } catch (err) {
           console.error("SEO pre-rendering error, rendering default template:", err);
-          const indexPath = path.join(distPath, "index.html");
-          if (fs.existsSync(indexPath)) {
-            res.sendFile(indexPath);
-          } else {
-            res.status(500).send("Application index.html shell error: " + (err as Error).message);
-          }
+          res.sendFile(path.join(distPath, "index.html"));
         }
       });
     }

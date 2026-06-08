@@ -2,8 +2,8 @@
   "version": 2,
   "functions": {
     "api/index.ts": {
-      "maxDuration": 30,
-      "includeFiles": ["dist/**", "public/**"]
+      "runtime": "nodejs18.x",
+      "maxDuration": 30
     }
   },
   "headers": [
@@ -29,23 +29,23 @@
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "/api/index.ts"
+      "destination": "/api/index"
     },
     {
       "source": "/sitemap.xml",
-      "destination": "/api/index.ts"
+      "destination": "/api/index"
     },
     {
       "source": "/image-sitemap.xml",
-      "destination": "/api/index.ts"
+      "destination": "/api/index"
     },
     {
       "source": "/robots.txt",
-      "destination": "/api/index.ts"
+      "destination": "/api/index"
     },
     {
       "source": "/((?!.*\\..*).*)",
-      "destination": "/api/index.ts"
+      "destination": "/api/index"
     }
   ]
 }

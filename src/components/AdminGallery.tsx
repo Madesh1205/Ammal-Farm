@@ -98,6 +98,7 @@ export default function AdminGallery() {
   const [dragActive, setDragActive] = useState(false);
   const [uploadError, setUploadError] = useState<string | null>(null);
   const [itemToDelete, setItemToDelete] = useState<MediaItem | null>(null);
+  const [uploadDestination, setUploadDestination] = useState<'vercel' | 'local'>('local');
 
   useEffect(() => {
     const q = query(collection(db, 'media'), orderBy('createdAt', 'desc'));
@@ -206,61 +207,119 @@ export default function AdminGallery() {
         }
       }
 
-      const xhr = new XMLHttpRequest();
-      
-      xhr.upload.addEventListener('progress', (event) => {
-        if (event.lengthComputable) {
-          const progress = (event.loaded / event.total) * 100;
-          setUploadProgress(Math.round(progress));
-        }
-      });
-      
-      xhr.addEventListener('load', async () => {
-        if (xhr.status >= 200 && xhr.status < 300) {
-          try {
-            const response = JSON.parse(xhr.responseText);
-            const downloadUrl = response.url;
-            
-            await addDoc(collection(db, 'media'), {
-              url: downloadUrl,
-              type: typeValue,
-              description: description || `Uploaded ${targetName}`,
-              isHighlight: false,
-              createdAt: serverTimestamp(),
-            });
-            
-            setUploading(false);
-            setUploadProgress(null);
-            setFile(null);
-            setDescription('');
-            alert('File uploaded to Vercel Blob and registered successfully!');
-          } catch (dbError: any) {
-            console.error("Firestore write error after upload:", dbError);
-            handleFirestoreError(dbError, OperationType.WRITE, 'media');
+      if (uploadDestination === 'local') {
+        const xhr = new XMLHttpRequest();
+        
+        xhr.upload.addEventListener('progress', (event) => {
+          if (event.lengthComputable) {
+            const progress = (event.loaded / event.total) * 100;
+            setUploadProgress(Math.round(progress));
+          }
+        });
+        
+        xhr.addEventListener('load', async () => {
+          if (xhr.status >= 200 && xhr.status < 300) {
+            try {
+              const response = JSON.parse(xhr.responseText);
+              const downloadUrl = response.url;
+              
+              await addDoc(collection(db, 'media'), {
+                url: downloadUrl,
+                type: typeValue,
+                description: description || `Uploaded ${targetName}`,
+                isHighlight: false,
+                createdAt: serverTimestamp(),
+              });
+              
+              setUploading(false);
+              setUploadProgress(null);
+              setFile(null);
+              setDescription('');
+              alert('File uploaded to local folder and registered successfully!');
+            } catch (dbError: any) {
+              console.error("Firestore write error after local upload:", dbError);
+              handleFirestoreError(dbError, OperationType.WRITE, 'media');
+              setUploading(false);
+              setUploadProgress(null);
+            }
+          } else {
+            try {
+              const errRes = JSON.parse(xhr.responseText);
+              setUploadError(errRes.error || "Failed to upload file to local folder.");
+            } catch {
+              setUploadError("Failed to upload file to local folder.");
+            }
             setUploading(false);
             setUploadProgress(null);
           }
-        } else {
-          try {
-            const errRes = JSON.parse(xhr.responseText);
-            setUploadError(errRes.error || "Failed to upload file to Vercel Blob.");
-          } catch {
-            setUploadError("Failed to upload file to Vercel Blob.");
-          }
+        });
+        
+        xhr.addEventListener('error', () => {
+          setUploadError("Network error occurred during local folder upload.");
           setUploading(false);
           setUploadProgress(null);
-        }
-      });
-      
-      xhr.addEventListener('error', () => {
-        setUploadError("Network error occurred during Vercel Blob upload.");
-        setUploading(false);
-        setUploadProgress(null);
-      });
-      
-      xhr.open('POST', `/api/upload?filename=${encodeURIComponent(targetName)}`);
-      xhr.setRequestHeader('Content-Type', isVideo ? (file.type || 'application/octet-stream') : 'image/jpeg');
-      xhr.send(dataToUpload);
+        });
+        
+        xhr.open('POST', `/api/upload-local?filename=${encodeURIComponent(targetName)}`);
+        xhr.setRequestHeader('Content-Type', isVideo ? (file.type || 'application/octet-stream') : 'image/jpeg');
+        xhr.send(dataToUpload);
+      } else {
+        const xhr = new XMLHttpRequest();
+        
+        xhr.upload.addEventListener('progress', (event) => {
+          if (event.lengthComputable) {
+            const progress = (event.loaded / event.total) * 100;
+            setUploadProgress(Math.round(progress));
+          }
+        });
+        
+        xhr.addEventListener('load', async () => {
+          if (xhr.status >= 200 && xhr.status < 300) {
+            try {
+              const response = JSON.parse(xhr.responseText);
+              const downloadUrl = response.url;
+              
+              await addDoc(collection(db, 'media'), {
+                url: downloadUrl,
+                type: typeValue,
+                description: description || `Uploaded ${targetName}`,
+                isHighlight: false,
+                createdAt: serverTimestamp(),
+              });
+              
+              setUploading(false);
+              setUploadProgress(null);
+              setFile(null);
+              setDescription('');
+              alert('File uploaded to Vercel Blob and registered successfully!');
+            } catch (dbError: any) {
+              console.error("Firestore write error after upload:", dbError);
+              handleFirestoreError(dbError, OperationType.WRITE, 'media');
+              setUploading(false);
+              setUploadProgress(null);
+            }
+          } else {
+            try {
+              const errRes = JSON.parse(xhr.responseText);
+              setUploadError(errRes.error || "Failed to upload file to Vercel Blob.");
+            } catch {
+              setUploadError("Failed to upload file to Vercel Blob.");
+            }
+            setUploading(false);
+            setUploadProgress(null);
+          }
+        });
+        
+        xhr.addEventListener('error', () => {
+          setUploadError("Network error occurred during Vercel Blob upload.");
+          setUploading(false);
+          setUploadProgress(null);
+        });
+        
+        xhr.open('POST', `/api/upload?filename=${encodeURIComponent(targetName)}`);
+        xhr.setRequestHeader('Content-Type', isVideo ? (file.type || 'application/octet-stream') : 'image/jpeg');
+        xhr.send(dataToUpload);
+      }
     } catch (e: any) {
       console.error(e);
       setUploadError(e.message || "An unexpected error occurred during setup.");
@@ -312,6 +371,19 @@ export default function AdminGallery() {
         const storageRef = ref(storage, item.url);
         await deleteObject(storageRef);
       } 
+      // Delete from local folder if it's a local /uploads/ URL
+      else if (item.url.startsWith('/uploads/')) {
+        try {
+          const response = await fetch(`/api/delete-local?url=${encodeURIComponent(item.url)}`, {
+            method: 'DELETE',
+          });
+          if (!response.ok) {
+            console.error("Failed to delete from local folder:", await response.text());
+          }
+        } catch (err) {
+          console.error("Error calling local folder delete endpoint:", err);
+        }
+      }
       // Delete from Vercel Blob if it's a Vercel Blob URL
       else if (item.url.includes('vercel-storage.com')) {
         try {
@@ -443,6 +515,39 @@ export default function AdminGallery() {
                   )}
                 </div>
 
+                {/* Upload Destination Option */}
+                <div className="space-y-2 pt-2">
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-stone-500 block">Select Storage Destination</span>
+                  <div className="grid grid-cols-2 gap-4">
+                    <button
+                      type="button"
+                      onClick={() => setUploadDestination('vercel')}
+                      disabled={uploading}
+                      className={`py-3 px-4 rounded text-xs font-bold uppercase tracking-widest border transition-all flex flex-col items-center justify-center gap-1 ${
+                        uploadDestination === 'vercel'
+                          ? 'border-primary bg-primary/5 text-primary'
+                          : 'border-stone-200 bg-stone-50 text-stone-400 hover:text-stone-600 hover:bg-stone-100'
+                      }`}
+                    >
+                      <span>Vercel Blob</span>
+                      <span className="text-[8px] font-normal tracking-tight lowercase text-stone-400">Via Proxy Endpoint</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setUploadDestination('local')}
+                      disabled={uploading}
+                      className={`py-3 px-4 rounded text-xs font-bold uppercase tracking-widest border transition-all flex flex-col items-center justify-center gap-1 ${
+                        uploadDestination === 'local'
+                          ? 'border-primary bg-primary/5 text-primary'
+                          : 'border-stone-200 bg-stone-50 text-stone-400 hover:text-stone-600 hover:bg-stone-100'
+                      }`}
+                    >
+                      <span>Local Folder</span>
+                      <span className="text-[8px] font-normal tracking-tight lowercase text-stone-400">Direct server write</span>
+                    </button>
+                  </div>
+                </div>
+
                 <input 
                   type="text" 
                   placeholder="Tell customers about this file... (e.g. Pure-Bred Nellore Judipi)"
@@ -463,7 +568,7 @@ export default function AdminGallery() {
                     <div className="flex justify-between text-[10px] font-bold uppercase tracking-widest text-[#2ecc71]">
                       <span className="flex items-center gap-1.5 shrink-0">
                         <span className="animate-spin inline-block"><FaSpinner /></span>
-                        {uploadProgress <= 5 ? "Compressing target image..." : "Uploading to Vercel Blob..."}
+                        {uploadProgress <= 5 ? "Compressing target image..." : (uploadDestination === 'local' ? "Uploading to local folder..." : "Uploading to Vercel Blob...")}
                       </span>
                       <span>{uploadProgress}%</span>
                     </div>
