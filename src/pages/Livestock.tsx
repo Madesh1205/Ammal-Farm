@@ -28,7 +28,7 @@ export default function Livestock() {
               >
                 <span className="text-[10px] uppercase font-bold text-accent tracking-widest mb-4">Featured Selection</span>
                 <div className="aspect-square overflow-hidden mb-6 bg-stone-50">
-                  <img src={goat.image} alt={`${goat.name} (${goat.aka}) - Premium Livestock from Ammal Farm`} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+                  <img src={goat.image} alt={`${goat.name} (${goat.aka}) - Premium Livestock from Ammal Farm`} loading="lazy" decoding="async" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
                 </div>
                 <h3 className="text-2xl font-bold mb-2">{goat.name}</h3>
                 <p className="text-[13px] text-text-muted leading-relaxed mb-8 flex-grow">

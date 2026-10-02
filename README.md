@@ -4,7 +4,7 @@
 
 **Premium Livestock & Poultry Farm — Vellore, Tamil Nadu**
 
-[![Live Website](https://img.shields.io/badge/🌐%20Live%20Website-ammalfarm.vercel.app-2D5A27?style=for-the-badge)](https://ammalfarm.vercel.app)
+[![Live Website](https://img.shields.io/badge/🌐%20Live%20Website-ammalfarm.dpdns.org-2D5A27?style=for-the-badge)](https://ammalfarm.dpdns.org)
 [![WhatsApp](https://img.shields.io/badge/WhatsApp-Enquire%20Now-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](https://wa.me/916380898358)
 [![Instagram](https://img.shields.io/badge/Instagram-@ammal__farm-E4405F?style=for-the-badge&logo=instagram&logoColor=white)](https://instagram.com/ammal_farm)
 
@@ -131,9 +131,10 @@ Ammal-Farm/
 
 ## 🌐 Deployment
 
-The site is deployed on **Vercel** and is automatically redeployed on every push to the `main` branch.
+The site is deployed on **Vercel** and configured for both custom and default domains:
 
-Live URL: **[https://ammalfarm.vercel.app](https://ammalfarm.vercel.app)**
+- **Primary Domain:** **[https://ammalfarm.dpdns.org](https://ammalfarm.dpdns.org)**
+- **Alternate Domain:** **[https://ammalfarm.vercel.app](https://ammalfarm.vercel.app)**
 
 ---
 

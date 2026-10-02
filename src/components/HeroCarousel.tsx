@@ -42,6 +42,14 @@ export default function HeroCarousel() {
   }, []);
 
   useEffect(() => {
+    // Preload all slide images into browser cache
+    SLIDES.forEach((slide) => {
+      const img = new Image();
+      img.src = slide.image;
+    });
+  }, []);
+
+  useEffect(() => {
     const timer = setInterval(next, 8000);
     return () => clearInterval(timer);
   }, [next]);
@@ -54,7 +62,7 @@ export default function HeroCarousel() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 1 }}
+          transition={{ duration: 0.6 }}
           className="absolute inset-0"
         >
           {/* Background Image */}
@@ -63,6 +71,8 @@ export default function HeroCarousel() {
               src={SLIDES[current].image} 
               alt={`${SLIDES[current].title} - ${SLIDES[current].subtitle} at Ammal Farm`} 
               decoding="async"
+              loading={current === 0 ? "eager" : "lazy"}
+              fetchPriority={current === 0 ? "high" : "auto"}
               className="w-full h-full object-cover opacity-60 scale-105"
             />
             <div className="absolute inset-0 bg-gradient-to-r from-stone-900/80 via-stone-900/40 to-transparent" />

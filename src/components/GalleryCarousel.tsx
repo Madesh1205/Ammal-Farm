@@ -58,6 +58,16 @@ export default function GalleryCarousel() {
   }, []);
 
   useEffect(() => {
+    // Preload items into memory
+    items.forEach((item) => {
+      if (item.type === 'image') {
+        const img = new Image();
+        img.src = item.url;
+      }
+    });
+  }, [items]);
+
+  useEffect(() => {
     if (currentIndex >= items.length && items.length > 0) {
       setCurrentIndex(0);
     }
