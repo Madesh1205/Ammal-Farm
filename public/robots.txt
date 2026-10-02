@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /admin
 
-Sitemap: https://ammalfarm.vercel.app/sitemap.xml
+Sitemap: https://ammalfarm.dpdns.org/sitemap.xml
+Sitemap: https://ammalfarm.dpdns.org/image-sitemap.xml
