@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 const SLIDES = [
   {
-    image: 'https://dlugisbcds8fnzdn.public.blob.vercel-storage.com/images/nellore-judipi.jpg',
+    image: '/nellore-judipi.jpg',
     title: 'Precision Rearing',
     subtitle: 'The Gold Standard of Tamil Nadu',
     description: 'Premier livestock producer specializing in elite Nellore Judipi and Salem Black goats with scientific rearing practices.',
@@ -13,7 +13,7 @@ const SLIDES = [
     link: '/livestock'
   },
   {
-    image: 'https://dlugisbcds8fnzdn.public.blob.vercel-storage.com/images/salem%20black1.jpg',
+    image: '/salem-black.jpg',
     title: 'Majestic Pedigree',
     subtitle: 'Salem Black Excellence',
     description: 'Leading livestock seller sourcing the finest breeding lines to ensure superior growth rates and resilient breeds.',
@@ -21,7 +21,7 @@ const SLIDES = [
     link: '/visit'
   },
   {
-    image: 'https://dlugisbcds8fnzdn.public.blob.vercel-storage.com/images/country-chicken.jpg',
+    image: '/country-chicken.jpg',
     title: 'Sustainable Poultry',
     subtitle: 'Natural Nattu Kozhi',
     description: 'Livestock producer of free-range country chickens and ducks raised naturally in stress-free environments.',

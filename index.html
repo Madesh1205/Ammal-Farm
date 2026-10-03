@@ -10,23 +10,27 @@
     <!-- Preconnects & Resource Hints for Ultra-Fast Loading -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preconnect" href="https://dlugisbcds8fnzdn.public.blob.vercel-storage.com" crossorigin />
     
     <!-- Google Fonts with display=swap -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@100..900&display=swap" rel="stylesheet" />
 
     <!-- Preload Hero Image & Logo -->
-    <link rel="preload" as="image" href="https://dlugisbcds8fnzdn.public.blob.vercel-storage.com/images/nellore-judipi.jpg" fetchpriority="high" />
-    <link rel="preload" as="image" href="https://dlugisbcds8fnzdn.public.blob.vercel-storage.com/images/logo.jpeg" />
+    <link rel="preload" as="image" href="/nellore-judipi.jpg" fetchpriority="high" />
+    <link rel="preload" as="image" href="/logo.jpeg" />
 
     <link rel="canonical" href="https://ammalfarm.dpdns.org/" />
+
+    <!-- Site Name Metadata for Google Search, Meta, and Mobile Apps -->
+    <meta name="application-name" content="Ammal Farm" />
+    <meta name="apple-mobile-web-app-title" content="Ammal Farm" />
+    <meta property="og:site_name" content="Ammal Farm" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://ammalfarm.dpdns.org/" />
     <meta property="og:title" content="Ammal Farm | Premium Livestock Producer & Seller" />
     <meta property="og:description" content="Leading livestock producer in Tamil Nadu specializing in premium Nellore Judipi and Salem Black goats, plus free-range poultry." />
-    <meta property="og:image" content="https://dlugisbcds8fnzdn.public.blob.vercel-storage.com/images/logo.jpeg" />
+    <meta property="og:image" content="https://ammalfarm.dpdns.org/logo.jpeg" />
     <meta property="og:image:alt" content="Ammal Farm Logo - Premium Livestock Producer" />
 
     <!-- Twitter -->
@@ -34,9 +38,9 @@
     <meta property="twitter:url" content="https://ammalfarm.dpdns.org/" />
     <meta property="twitter:title" content="Ammal Farm | Livestock Producer & Seller" />
     <meta property="twitter:description" content="Premium livestock producer in Tamil Nadu. Specializing in Nellore Judipi and Salem Black livestock." />
-    <meta property="twitter:image" content="https://dlugisbcds8fnzdn.public.blob.vercel-storage.com/images/logo.jpeg" />
+    <meta property="twitter:image" content="https://ammalfarm.dpdns.org/logo.jpeg" />
 
-    <link rel="icon" type="image/jpeg" href="https://dlugisbcds8fnzdn.public.blob.vercel-storage.com/images/logo.jpeg" />
+    <link rel="icon" type="image/jpeg" href="/logo.jpeg" />
     <link rel="manifest" href="/manifest.json" />
     <meta name="theme-color" content="#a4c639" />
     <meta name="mobile-web-app-capable" content="yes" />
@@ -44,49 +48,63 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
 
-    <!-- Structured Data (JSON-LD) -->
+    <!-- Structured Data (JSON-LD) for Google Site Name & Local Business -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "LocalBusiness",
-      "name": "Ammal Farm",
-      "image": "https://dlugisbcds8fnzdn.public.blob.vercel-storage.com/images/logo.jpeg",
-      "@id": "https://ammalfarm.dpdns.org",
-      "url": "https://ammalfarm.dpdns.org",
-      "telephone": "+916380898358",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "",
-        "addressLocality": "Tamil Nadu",
-        "addressRegion": "TN",
-        "postalCode": "",
-        "addressCountry": "IN"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": 11.1271,
-        "longitude": 78.6569
-      },
-      "openingHoursSpecification": {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-          "Saturday",
-          "Sunday"
-        ],
-        "opens": "00:00",
-        "closes": "23:59"
-      },
-      "sameAs": [
-        "https://ammalfarm.vercel.app",
-        "https://ammalfarm.com",
-        "https://instagram.com/ammal_farm"
-      ],
-      "description": "Ammal Farm is a premier livestock producer and seller in Tamil Nadu, offering Nellore Judipi goats, Salem Black goats, Nattu Kozhi, and fresh farm products."
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://ammalfarm.dpdns.org/#website",
+          "url": "https://ammalfarm.dpdns.org/",
+          "name": "Ammal Farm",
+          "alternateName": ["Ammal Farm Tamil Nadu", "Ammal Farm Vellore", "AmmalFarm"],
+          "publisher": {
+            "@id": "https://ammalfarm.dpdns.org/#organization"
+          }
+        },
+        {
+          "@type": "LocalBusiness",
+          "@id": "https://ammalfarm.dpdns.org/#organization",
+          "name": "Ammal Farm",
+          "image": "https://ammalfarm.dpdns.org/logo.jpeg",
+          "url": "https://ammalfarm.dpdns.org/",
+          "telephone": "+916380898358",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Ammal Farm, Rusha post, Kollimedu",
+            "addressLocality": "VELLORE",
+            "addressRegion": "Tamil Nadu",
+            "postalCode": "632209",
+            "addressCountry": "IN"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 12.9818,
+            "longitude": 79.2014
+          },
+          "openingHoursSpecification": {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday",
+              "Sunday"
+            ],
+            "opens": "00:00",
+            "closes": "23:59"
+          },
+          "sameAs": [
+            "https://ammalfarm.vercel.app",
+            "https://ammalfarm.com",
+            "https://instagram.com/ammal_farm"
+          ],
+          "description": "Ammal Farm is a premier livestock producer and seller in Tamil Nadu, offering Nellore Judipi goats, Salem Black goats, Nattu Kozhi, and fresh farm products."
+        }
+      ]
     }
     </script>
   </head>

@@ -1,11 +1,16 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth';
-import { getFirestore, doc, getDocFromServer } from 'firebase/firestore';
+import { initializeFirestore, doc, getDocFromServer } from 'firebase/firestore';
 import { getStorage } from 'firebase/storage';
 import firebaseConfig from '../../firebase-applet-config.json';
 
 const app = initializeApp(firebaseConfig);
-export const db = getFirestore(app, firebaseConfig.firestoreDatabaseId);
+
+// Initialize Firestore with auto-detected long polling fallback for max connectivity resilience
+export const db = initializeFirestore(app, {
+  experimentalAutoDetectLongPolling: true,
+}, firebaseConfig.firestoreDatabaseId);
+
 export const auth = getAuth(app);
 export const storage = getStorage(app);
 
@@ -15,7 +20,12 @@ export async function testFirestoreConnection() {
     await getDocFromServer(doc(db, '_internal_', 'connection_test'));
     return true;
   } catch (error: any) {
-    if (error.message?.includes('the client is offline') || error.code === 'unavailable') {
+    if (
+      error.message?.includes('the client is offline') || 
+      error.message?.includes('Could not reach Cloud Firestore backend') ||
+      error.code === 'unavailable'
+    ) {
+      console.warn('Firestore operating in offline fallback mode:', error.message);
       return 'UNAVAILABLE';
     }
     if (error.code === 'permission-denied') {
@@ -57,8 +67,17 @@ export interface FirestoreErrorInfo {
 }
 
 export function handleFirestoreError(error: unknown, operationType: OperationType, path: string | null) {
+  const errCode = (error as any)?.code;
+  const errMsg = error instanceof Error ? error.message : String(error);
+
+  // Suppress uncaught throws for transient network unavailability
+  if (errCode === 'unavailable' || errMsg.includes('Could not reach Cloud Firestore backend') || errMsg.includes('the client is offline')) {
+    console.warn(`Firestore Network Warning (${operationType} on ${path}): Backend currently unreachable. Operating offline.`);
+    return;
+  }
+
   const errInfo: FirestoreErrorInfo = {
-    error: error instanceof Error ? error.message : String(error),
+    error: errMsg,
     authInfo: {
       userId: auth.currentUser?.uid,
       email: auth.currentUser?.email,

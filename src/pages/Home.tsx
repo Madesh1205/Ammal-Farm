@@ -40,7 +40,7 @@ export default function Home() {
       <section className="py-24 bg-stone-900 overflow-hidden relative">
         <div className="absolute inset-0 opacity-20">
           <img 
-            src="https://dlugisbcds8fnzdn.public.blob.vercel-storage.com/images/nellore-judipi.jpg" 
+            src="/nellore-judipi.jpg" 
             loading="lazy"
             decoding="async"
             className="w-full h-full object-cover" 

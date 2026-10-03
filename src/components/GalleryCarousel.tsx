@@ -14,14 +14,14 @@ interface MediaItem {
 }
 
 const STATIC_GALLERY: MediaItem[] = [
-  { id: 's1', url: 'https://dlugisbcds8fnzdn.public.blob.vercel-storage.com/images/nellore-judipi.jpg', type: 'image', description: 'Ammal Farm Livestock - Healthy farm herd in Tamil Nadu' },
-  { id: 's2', url: 'https://dlugisbcds8fnzdn.public.blob.vercel-storage.com/images/nellore-judipi.jpg', type: 'image', description: 'Nellore Judipi Buck - Premium Bakrid Goat at Ammal Farm' },
-  { id: 's3', url: 'https://dlugisbcds8fnzdn.public.blob.vercel-storage.com/images/salem%20black1.jpg', type: 'image', description: 'Salem Black Goat - Hardy indigenous livestock Tamil Nadu' },
-  { id: 's4', url: 'https://dlugisbcds8fnzdn.public.blob.vercel-storage.com/images/country-chicken.jpg', type: 'image', description: 'Free-range country chicken (Nattu Kozhi) organic farm' },
-  { id: 's5', url: 'https://dlugisbcds8fnzdn.public.blob.vercel-storage.com/images/ducks.jpg', type: 'image', description: 'Farm ducks in natural habitat at Ammal Farm' },
-  { id: 's6', url: 'https://dlugisbcds8fnzdn.public.blob.vercel-storage.com/images/black-chicken.jpg', type: 'image', description: 'Kadaknath poultry - Medicinal black chicken Tamil Nadu' },
-  { id: 's7', url: 'https://dlugisbcds8fnzdn.public.blob.vercel-storage.com/images/turkey.jpg', type: 'image', description: 'Turkey (Van Kozhi) seasonal livestock Ammal Farm' },
-  { id: 's8', url: 'https://dlugisbcds8fnzdn.public.blob.vercel-storage.com/images/turkey%20eating.jpg', type: 'image', description: 'Fresh farm feeding - Sustainable livestock practices' },
+  { id: 's1', url: '/nellore-judipi.jpg', type: 'image', description: 'Ammal Farm Livestock - Healthy farm herd in Tamil Nadu' },
+  { id: 's2', url: '/farm-herd.jpg', type: 'image', description: 'Nellore Judipi Buck - Premium Bakrid Goat at Ammal Farm' },
+  { id: 's3', url: '/salem-black.jpg', type: 'image', description: 'Salem Black Goat - Hardy indigenous livestock Tamil Nadu' },
+  { id: 's4', url: '/country-chicken.jpg', type: 'image', description: 'Free-range country chicken (Nattu Kozhi) organic farm' },
+  { id: 's5', url: '/ducks.jpg', type: 'image', description: 'Farm ducks in natural habitat at Ammal Farm' },
+  { id: 's6', url: '/black-chicken.jpg', type: 'image', description: 'Kadaknath poultry - Medicinal black chicken Tamil Nadu' },
+  { id: 's7', url: '/turkey.jpg', type: 'image', description: 'Turkey (Van Kozhi) seasonal livestock Ammal Farm' },
+  { id: 's8', url: '/logo.jpeg', type: 'image', description: 'Fresh farm feeding - Sustainable livestock practices' },
 ];
 
 export default function GalleryCarousel() {
