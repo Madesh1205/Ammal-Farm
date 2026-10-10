@@ -326,29 +326,42 @@ const PORT = 3000;
   });
 
   // Dynamic SEO Injection helper for serving index.html
-  const getSeoInjectedHtml = (originalHtml: string, urlPath: string): string => {
-    let title = "Ammal Farm | Premium Nellore Jodipi and Salem Black Goats in Tamil Nadu";
-    let desc = "Ammal Farm is Tamil Nadu's elite breeding farm. Producing registered, high-bone-density Nellore Jodipi / Judipi sheep, pure black Salem Black goats, and organic free-range poultry.";
-    let keywords = "Ammal Farm, Nellore Jodipi, Jodipi Goat, Salem Black, Tamil Nadu Goat Breeding, Buy goats Vellore, Organic Poultry";
-    let canonical = `${BASE_URL}${urlPath}`;
+  const getSeoInjectedHtml = (originalHtml: string, urlPath: string, host?: string): string => {
+    const isAduSanthai = host && host.includes("adusanthai");
+    const currentBaseUrl = isAduSanthai ? "https://adusanthai.ammalfarm.dpdns.org" : BASE_URL;
+    const siteName = isAduSanthai ? "Ammal Farm Adu Santhai" : "Ammal Farm";
+
+    let title = isAduSanthai 
+      ? "Ammal Farm Adu Santhai | Direct Livestock & Goat Marketplace"
+      : "Ammal Farm | Premium Nellore Jodipi and Salem Black Goats in Tamil Nadu";
+      
+    let desc = isAduSanthai
+      ? "Tamil Nadu's premier direct marketplace for verified goats, associated with Ammal Farm. Connecting breeders, farmers, and buyers with complete transparency."
+      : "Ammal Farm is Tamil Nadu's elite breeding farm. Producing registered, high-bone-density Nellore Jodipi / Judipi sheep, pure black Salem Black goats, and organic free-range poultry.";
+      
+    let keywords = isAduSanthai
+      ? "Ammal Farm Adu Santhai, Adu Santhai, Goat Marketplace Tamil Nadu, Buy Goats Online, Nellore Jodipi for sale"
+      : "Ammal Farm, Nellore Jodipi, Jodipi Goat, Salem Black, Tamil Nadu Goat Breeding, Buy goats Vellore, Organic Poultry";
+      
+    let canonical = `${currentBaseUrl}${urlPath}`;
 
     // 1. Fallback primary screens
     if (urlPath === "/livestock") {
-      title = "Pure Livestock Selections | Nellore Jodipi & Salem Black | Ammal Farm";
+      title = isAduSanthai ? "Live Goat Listings | Adu Santhai - Ammal Farm" : "Pure Livestock Selections | Nellore Jodipi & Salem Black | Ammal Farm";
       desc = "Discover our verified, high-retention goat directory at Ammal Farm. View pedigree weights, ages, feed details, and request immediate quotations.";
     } else if (urlPath === "/poultry") {
-      title = "Organic Country Chickens & Kadaknath Eggs | Ammal Farm";
+      title = "Organic Country Chickens & Kadaknath Eggs | " + siteName;
       desc = "Purchase premium hyper-melanic Kadaknath black meat chickens, high-grade Aseel crosses, turkey poults, and fresh farm-direct organic eggs.";
     } else if (urlPath === "/gallery") {
-      title = "Livestock Gallery and Field Videos | Ammal Farm";
+      title = "Livestock Gallery and Field Videos | " + siteName;
       desc = "Step inside Ammal Farm's breeding pens. Explore real images and demonstrative videos showcasing our healthy Jodipi sheep, Salem Black bucks, and free-range chickens.";
     } else if (urlPath === "/visit") {
-      title = "Schedule a Farm Visit & Agro Consulting | Ammal Farm";
+      title = "Schedule a Farm Visit & Agro Consulting | " + siteName;
       desc = "Plan your guided study visit of Ammal Farm in Vellore, Tamil Nadu. Touch base with veteran breeders on slatted wood design, vaccination, and feeds.";
     }
 
     // Dynamic OG image using our internal SVG engine
-    const ogImageUrl = `${BASE_URL}/api/og?title=${encodeURIComponent(title)}&desc=${encodeURIComponent(desc)}`;
+    const ogImageUrl = `${currentBaseUrl}/api/og?title=${encodeURIComponent(title)}&desc=${encodeURIComponent(desc)}`;
 
     // Do surgical replacements on meta tags
     let html = originalHtml;
@@ -357,8 +370,11 @@ const PORT = 3000;
     // Replace metadata properties
     html = html.replace(/<meta name="description" content="[^"]*?"/gi, `<meta name="description" content="${desc}"`);
     html = html.replace(/<meta name="keywords" content="[^"]*?"/gi, `<meta name="keywords" content="${keywords}"`);
+    html = html.replace(/<meta name="application-name" content="[^"]*?"/gi, `<meta name="application-name" content="${siteName}"`);
+    html = html.replace(/<meta name="apple-mobile-web-app-title" content="[^"]*?"/gi, `<meta name="apple-mobile-web-app-title" content="${siteName}"`);
     
     // Open Graph
+    html = html.replace(/<meta property="og:site_name" content="[^"]*?"/gi, `<meta property="og:site_name" content="${siteName}"`);
     html = html.replace(/<meta property="og:title" content="[^"]*?"/gi, `<meta property="og:title" content="${title}"`);
     html = html.replace(/<meta property="og:description" content="[^"]*?"/gi, `<meta property="og:description" content="${desc}"`);
     html = html.replace(/<meta property="og:url" content="[^"]*?"/gi, `<meta property="og:url" content="${canonical}"`);
@@ -399,7 +415,7 @@ const PORT = 3000;
           const indexPath = path.join(distPath, "index.html");
           if (fs.existsSync(indexPath)) {
             const rawHtml = fs.readFileSync(indexPath, "utf8");
-            const seoHtml = getSeoInjectedHtml(rawHtml, req.path);
+            const seoHtml = getSeoInjectedHtml(rawHtml, req.path, req.get('host'));
             res.send(seoHtml);
           } else {
             console.warn(`Production dist/index.html not found under process.cwd(): ${indexPath}`);

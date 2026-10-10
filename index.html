@@ -48,7 +48,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
 
-    <!-- Structured Data (JSON-LD) for Google Site Name & Local Business -->
+    <!-- Structured Data (JSON-LD) for Google Site Name & Local Business (Supports primary & adusanthai subdomain) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -59,6 +59,16 @@
           "url": "https://ammalfarm.dpdns.org/",
           "name": "Ammal Farm",
           "alternateName": ["Ammal Farm Tamil Nadu", "Ammal Farm Vellore", "AmmalFarm"],
+          "publisher": {
+            "@id": "https://ammalfarm.dpdns.org/#organization"
+          }
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://adusanthai.ammalfarm.dpdns.org/#website",
+          "url": "https://adusanthai.ammalfarm.dpdns.org/",
+          "name": "Ammal Farm Adu Santhai",
+          "alternateName": ["Adu Santhai", "Ammal Farm Market"],
           "publisher": {
             "@id": "https://ammalfarm.dpdns.org/#organization"
           }
@@ -98,6 +108,7 @@
             "closes": "23:59"
           },
           "sameAs": [
+            "https://adusanthai.ammalfarm.dpdns.org",
             "https://ammalfarm.vercel.app",
             "https://ammalfarm.com",
             "https://instagram.com/ammal_farm"
